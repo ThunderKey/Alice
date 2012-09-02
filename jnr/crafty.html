@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<head>  
+    <script type="text/javascript" src="crafty-min.js"></script>
+      <style>
+        body, html { margin:0; padding: 0; overflow:hidden; font-family:Arial; font-size:20px }
+        #cr-stage { color:white }
+      </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+      Crafty.c("Twoway", {
+      _speed: 3,
+        _up: false,
+
+        init: function () {
+          this.requires("Fourway, Keyboard");
+        },
+
+        twoway: function (speed, jump) {
+
+          this.multiway(speed, {
+            RIGHT_ARROW: 0,
+            LEFT_ARROW: 180,
+            D: 0,
+            A: 180,
+            Q: 180
+          });
+
+          if (speed) this._speed = speed;
+          jump = jump || this._speed * 2;
+
+          this.bind("EnterFrame", function () {
+            if (this.disableControls) return;
+            if (this._up) {
+              this.y -= jump;
+              this._falling = true;
+              this.trigger('Moved', { x: this.x, y: this.y + jump });
+            }
+          }).bind("KeyDown", function () {
+            if (this.isDown("UP_ARROW") || this.isDown("W") || this.isDown("Z")) this._up = true;
+          });
+
+          return this;
+        }
+      });
+      Crafty.init(600, 400);
+      Crafty.background('rgb(127,127,127)');
+      Crafty.sprite(45, "player.png", {
+        standing_right: [0, 0],
+        running_right: [1, 0],
+        jumping_right: [2, 0],
+        standing_left: [0, 1],
+        running_left: [1, 1],
+        jumping_left: [2, 1],
+      });
+      Crafty.c("Floor", {
+      });
+      var floor = Crafty.e("Floor, 2D, DOM, Gravity, Color").color("green").attr({w: 600, h: 100, x: 0, y: 300});
+      var player = Crafty.e("2D, DOM, Twoway, Gravity, standing_right, Collision")
+                     .twoway(3, 11)
+                     .gravity("Floor")
+                     .attr({w: 45, h: 45})
+                     .gravityConst(0.5);
+      for(var i = 0; i < 5; i++){
+        var block = Crafty.e("Floor, solid, 2D, DOM, Color").color("brown").attr({w: 40, h: 40, x: Crafty.math.randomInt(0,11)*50, y: 250 - Crafty.math.randomInt(0,2)*50});
+ //       player.collision(block);
+      }
+      player.bind('Moved', function(from) {
+          if(from.x > this.x){
+            this.addComponent("running_left");
+            this.left = true;
+          }else if(from.x < this.x){
+            this.addComponent("running_right");
+            this.left = false;
+          }
+          if(this.hit('solid')){
+              this.attr({x: from.x, y:from.y});
+              this._up=false;
+          }
+      })
+      player.bind('KeyDown', function(e) {
+        if (e.key == Crafty.keys['UP_ARROW']) {
+          if(this.left){
+            this.addComponent("jumping_left");
+          }else{
+            this.addComponent("jumping_right");
+          }
+        }
+      });
+      player.bind('KeyUp', function(e) {
+          if(this.left){
+            this.addComponent("standing_left");
+          }else{
+            this.addComponent("standing_right");
+          }
+      });
+    </script>
+
+  </body>
+</html>
