@@ -43,7 +43,8 @@
           return this;
         }
       });
-      Crafty.init(600, 400);
+      Crafty.init(3000, 400);
+      Crafty.viewport.init(600, 400);
       Crafty.background('rgb(127,127,127)');
       Crafty.sprite(45, "player.png", {
         standing_right: [0, 0],
@@ -52,25 +53,31 @@
         standing_left: [0, 1],
         running_left: [1, 1],
         jumping_left: [2, 1],
+        player: [0,2]
       });
       Crafty.c("Floor", {
       });
-      var floor = Crafty.e("Floor, 2D, DOM, Gravity, Color").color("green").attr({w: 600, h: 100, x: 0, y: 300});
-      var player = Crafty.e("2D, DOM, Twoway, Gravity, standing_right, Collision")
+      var floor = Crafty.e("Floor, 2D, DOM, Gravity, Color").color("green").attr({w: 3000, h: 300, x: 0, y: 400});
+      var player = Crafty.e("2D, DOM, Twoway, Gravity, Collision, player, SpriteAnimation")
                      .twoway(3, 11)
+                     .animate("walk_right", 0, 2, 2)
+                     .animate("walk_left", 0, 3, 2)
                      .gravity("Floor")
-                     .attr({w: 45, h: 45})
+                     .attr({w: 45, h: 45, x:0, y:350})
                      .gravityConst(0.5);
-      for(var i = 0; i < 5; i++){
-        var block = Crafty.e("Floor, solid, 2D, DOM, Color").color("brown").attr({w: 40, h: 40, x: Crafty.math.randomInt(0,11)*50, y: 250 - Crafty.math.randomInt(0,2)*50});
+      for(var i = 0; i < 15; i++){
+        var block = Crafty.e("Floor, solid, 2D, DOM, Color").color("brown").attr({w: 30, h: 30, x: Crafty.math.randomInt(0,59)*50+10, y: 360 - Crafty.math.randomInt(0,2)*50});
  //       player.collision(block);
       }
       player.bind('Moved', function(from) {
           if(from.x > this.x){
-            this.addComponent("running_left");
+            if(!this.isPlaying("walk_left"))
+              this.animate("walk_left", 3, -1);
             this.left = true;
           }else if(from.x < this.x){
-            this.addComponent("running_right");
+            //this.addComponent("running_right");
+            if(!this.isPlaying("walk_right"))
+              this.animate("walk_right", 3, -1);
             this.left = false;
           }
           if(this.hit('solid')){
@@ -88,12 +95,14 @@
         }
       });
       player.bind('KeyUp', function(e) {
+          this.stop();
           if(this.left){
             this.addComponent("standing_left");
           }else{
             this.addComponent("standing_right");
           }
       });
+      Crafty.viewport.follow(player, 0, 0);
     </script>
 
   </body>
