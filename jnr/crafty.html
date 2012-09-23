@@ -58,18 +58,21 @@
       Crafty.c("Floor", {
       });
       var floor = Crafty.e("Floor, 2D, DOM, Gravity, Color").color("green").attr({w: 3000, h: 300, x: 0, y: 400});
+      Crafty.e("deadly, 2D").attr({w: 3400, h: 100, x: -200, y: 600});
+      Crafty.e("finish, 2D, Color, DOM").color("blue").attr({w: 10, h: 150, x: 2900, y: 250});
       var player = Crafty.e("2D, DOM, Twoway, Gravity, Collision, player, SpriteAnimation")
                      .twoway(3, 11)
                      .animate("walk_right", 0, 2, 2)
                      .animate("walk_left", 0, 3, 2)
                      .gravity("Floor")
-                     .attr({w: 45, h: 45, x:0, y:350})
+                     .attr({w: 45, h: 45, x:100, y:350, dead: false, won: false})
                      .gravityConst(0.5);
       for(var i = 0; i < 15; i++){
         var block = Crafty.e("Floor, solid, 2D, DOM, Color").color("brown").attr({w: 30, h: 30, x: Crafty.math.randomInt(0,59)*50+10, y: 360 - Crafty.math.randomInt(0,2)*50});
  //       player.collision(block);
       }
       player.bind('Moved', function(from) {
+        if(!this.dead) {
           if(from.x > this.x){
             if(!this.isPlaying("walk_left"))
               this.animate("walk_left", 3, -1);
@@ -82,9 +85,22 @@
           }
           if(this.hit('solid')){
               this.attr({x: from.x, y:from.y});
-              this._up=false;
+              this._up = false;
           }
-      })
+        }
+      });
+      player.onHit('deadly', function() {
+        if(!this.dead) {
+          this.dead = true;
+          alert("hit");
+        }
+      });
+      player.onHit('finish', function() {
+        if(!this.won) {
+          this.won = true;
+          alert("tadaaaa!");
+        }
+      });
       player.bind('KeyDown', function(e) {
         if (e.key == Crafty.keys['UP_ARROW']) {
           if(this.left){
