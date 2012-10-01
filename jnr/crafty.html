@@ -8,6 +8,7 @@
   </head>
   <body>
     <script type="text/javascript">
+      EnvironmentTracker = {};
       function restart() {
         if(confirm("restart?")) {
           Crafty.stop().init();
@@ -76,12 +77,13 @@
                        .gravity("Floor")
                        .attr({w: 45, h: 45, x: 100, y: 350, dead: false, won: false})
                        .gravityConst(0.5);
-        
+        EnvironmentTracker.player = player;
         player.bind('Moved', function(from) {
           if(!this.dead) {
             // move camera if in range
             if(this.x >= 150 && this.x <= 2500) {
               Crafty.viewport.x = 200 - this.x;
+              moveLoggingWindow(this.x - 150);
             }
             
             if(from.x > this.x){
@@ -134,8 +136,10 @@
       }
       
       function createBlocksAndGrounds() {
+        EnvironmentTracker.blocks = [];
         for(var i = 0; i < 15; i++){
           var block = Crafty.e("Floor, solid, 2D, DOM, Color, block").color("brown").attr({w: 30, h: 30, x: Crafty.math.randomInt(0,45)*50+200, y: 360 - Crafty.math.randomInt(0,2)*50});
+          EnvironmentTracker.blocks.push(block);
         }
         var used = 0;
         var max = 2000;
@@ -146,11 +150,39 @@
           used += ground_width + Crafty.math.randomInt(50, 150);
         }
         Crafty.e("Floor, 2D, DOM, Gravity, Color").color("green").attr({w: 3000 - used, h: 300, x: used, y: 400});
+
       }
       
       function setPlayer(player) {
       }
-    
+
+      function initLoggingWindow() {
+        w = EnvironmentTracker.logging_windows = {};
+        w.posx = Crafty.e("2D, DOM, Text").attr({w: 300, h: 15, y: 100}).css({"font": "10pt Arial"});
+        w.posy = Crafty.e("2D, DOM, Text").attr({w: 300, h: 15 , y: 115}).css({"font": "10pt Arial"});
+        w.block_number = Crafty.e("2D, DOM, Text").attr({w: 300, h: 15 , y: 130}).css({"font": "10pt Arial"});
+        logSensorValues();
+      }
+
+      function moveLoggingWindow(x){
+        Object.keys(EnvironmentTracker.logging_windows).forEach(function(key) {
+           EnvironmentTracker.logging_windows[key].x = x;
+        });
+      }
+
+      function logSensorValues(){
+        EnvironmentTracker.logging_windows.posx.text(
+         "PosX: " + EnvironmentTracker.player.pos()._x
+        );
+        EnvironmentTracker.logging_windows.posy.text(
+         "PosY: " + EnvironmentTracker.player.pos()._y
+        );
+        EnvironmentTracker.logging_windows.block_number.text(
+         "Blocks: " + EnvironmentTracker.blocks.length
+        );
+        setTimeout(logSensorValues, 0.5);
+      }
+
       function init() {
         Crafty.init(3000, 400);
         
@@ -177,6 +209,7 @@
         createBlocksAndGrounds();
         
         initPlayer();
+        initLoggingWindow();
       }
       
       init();
