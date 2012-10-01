@@ -11,29 +11,47 @@
       EnvironmentTracker = {};
       function restart() {
         if(confirm("restart?")) {
-          Crafty.stop().init();
+          //Crafty.stop().init();
+          Crafty('player').destroy();
+          Crafty('ground').destroy();
+          Crafty('block').destroy();
+          
+          createBlocksAndGrounds();
+          initPlayer();
           //init();
         }
-      }
-      
-      function die(player) {
-        player.stop();
-        player.dead = true;
-        alert("hit");
-        restart();
-      }
-      
-      function win(player) {
-        player.won = true;
-        player.stop();
-        alert("tadaaaa!");
-        restart();
       }
       
       function initMovement() {
         Crafty.c("Twoway", {
           _speed: 3,
           _up: false,
+          
+          dead: false,
+          die: function() {
+            alert("hit");
+            this.dead = true;
+            this._stopMoving();
+            restart();
+          },
+          
+          _stopMoving: function() {
+            this.disableControls = true;
+            this.reset();
+            this.addComponent('standing_right');
+          },
+          
+          won: false,
+          win: function() {
+            alert("tadaaaa!");
+            this.won = true;
+            this._stopMoving();
+            restart();
+          },
+          
+          isStopped: function() {
+            return this.disableControls || this.won || this.dead;
+          },
 
           init: function () {
             this.requires("Fourway, Keyboard");
@@ -52,7 +70,7 @@
             jump = jump || this._speed * 2;
 
             this.bind("EnterFrame", function () {
-              if (this.disableControls) return;
+              if (this.isStopped()) return;
               if (this._up) {
                 this.y -= jump;
                 this._falling = true;
@@ -70,90 +88,100 @@
       function initPlayer() {
         initMovement();
         
-        var player = Crafty.e("2D, DOM, Twoway, Gravity, Collision, player, SpriteAnimation")
-                       .twoway(3, 11)
-                       .animate("walk_right", 0, 2, 2)
-                       .animate("walk_left", 0, 3, 2)
-                       .gravity("Floor")
-                       .attr({w: 45, h: 45, x: 100, y: 350, dead: false, won: false})
-                       .gravityConst(0.5);
-        EnvironmentTracker.player = player;
-        player.bind('Moved', function(from) {
-          if(!this.dead) {
-            // move camera if in range
-            if(this.x >= 150 && this.x <= 2500) {
-              Crafty.viewport.x = 200 - this.x;
-              moveLoggingWindow(this.x - 150);
-            }
-            
-            if(from.x > this.x){
-              if(!this.isPlaying("walk_left"))
-                this.animate("walk_left", 3, -1);
-              this.left = true;
-            }else if(from.x < this.x){
-              //this.addComponent("running_right");
-              if(!this.isPlaying("walk_right"))
-                this.animate("walk_right", 3, -1);
-              this.left = false;
-            }
-            if(this.hit('solid')){
-                this.attr({x: from.x, y:from.y});
-                this._up = false;
-            }
-          }
-        });
-        
-        player.onHit('deadly', function() {
-          if(!this.dead) {
-            die(this);
-          }
-        });
-        
-        player.onHit('finish', function() {
-          if(!this.won) {
-            win(this);
-          }
-        });
-        
-        player.bind('KeyDown', function(e) {
-          if (e.key == Crafty.keys['UP_ARROW']) {
-            if(this.left){
-              this.addComponent("jumping_left");
-            }else{
-              this.addComponent("jumping_right");
-            }
-          }
-        });
-        
-        player.bind('KeyUp', function(e) {
-            this.stop();
-            if(this.left){
-              this.addComponent("standing_left");
-            }else{
-              this.addComponent("standing_right");
-            }
-        });
+       EnvironmentTracker.player = Crafty.e("2D, DOM, Twoway, Gravity, Collision, player, SpriteAnimation")
+              .twoway(3, 11)
+              .animate("walk_right", 0, 2, 2)
+              .animate("walk_left", 0, 3, 2)
+              .gravity("Floor")
+              .attr({w: 45, h: 45, x: 100, y: 350})
+              .gravityConst(0.5)        
+              .bind('Moved', function(from) {
+                if(!this.isStopped()) {
+                  // move camera if in range
+                  if(this.x >= 150 && this.x <= 2500) {
+                    Crafty.viewport.x = 200 - this.x;
+                    moveLoggingWindow(this.x - 150);
+                  }
+                  
+                  if(from.x > this.x){
+                    if(!this.isPlaying("walk_left"))
+                      this.animate("walk_left", 3, -1);
+                    this.left = true;
+                  }else if(from.x < this.x){
+                    //this.addComponent("running_right");
+                    if(!this.isPlaying("walk_right"))
+                      this.animate("walk_right", 3, -1);
+                    this.left = false;
+                  }
+                  if(this.hit('solid')){
+                      this.attr({x: from.x, y:from.y});
+                      this._up = false;
+                  }
+                }
+              })
+              .onHit('deadly', function() {
+                if(!this.dead) this.die();
+              })
+              .onHit('finish', function() {
+                console.debug('finish');
+                if(!this.won) this.win();
+              })
+              .bind('KeyDown', function(e) {
+                if (!this.isStopped() && e.key == Crafty.keys['UP_ARROW']) {
+                  if(this.left){
+                    this.addComponent("jumping_left");
+                  }else{
+                    this.addComponent("jumping_right");
+                  }
+                }
+              })
+              .bind('KeyUp', function(e) {
+                  this.stop();
+                  if(this.left){
+                    this.addComponent("standing_left");
+                  }else{
+                    this.addComponent("standing_right");
+                  }
+              });
       }
       
       function createBlocksAndGrounds() {
-        EnvironmentTracker.blocks = [];
-        for(var i = 0; i < 15; i++){
-          var block = Crafty.e("Floor, solid, 2D, DOM, Color, block").color("brown").attr({w: 30, h: 30, x: Crafty.math.randomInt(0,45)*50+200, y: 360 - Crafty.math.randomInt(0,2)*50});
-          EnvironmentTracker.blocks.push(block);
-        }
+        Crafty.c("Floor", {});
+        
         var used = 0;
         var max = 2000;
         
         while(used < max) {
           var ground_width = Crafty.math.randomInt(100, 600);
-          Crafty.e("Floor, solid, 2D, DOM, Gravity, Color").color("green").attr({w: ground_width, h: 300, x: used, y: 400});
+          createGround(ground_width, used);
           used += ground_width + Crafty.math.randomInt(50, 150);
         }
-        Crafty.e("Floor, 2D, DOM, Gravity, Color").color("green").attr({w: 3000 - used, h: 300, x: used, y: 400});
-
+        createGround(3000 - used, used);
+        
+        var usedX = [];
+        
+        EnvironmentTracker.blocks = [];
+        for(var i = 0; i < 15; i++){
+          var currentX;
+          do {
+            currentX = Crafty.math.randomInt(0,45)*50+200;
+          } while(usedX.indexOf(currentX) != -1);
+          usedX.push(currentX);
+          
+          EnvironmentTracker.blocks.push(createBlock(currentX, 360 - Crafty.math.randomInt(0,2)*50));
+        }
       }
       
-      function setPlayer(player) {
+      function createBlock(x, y) {
+        return Crafty.e("Floor, solid, 2D, DOM, Color, block")
+              .color("brown")
+              .attr({w: 30, h: 30, x: x, y: y});
+      }
+      
+      function createGround(width, xAxis) {
+        Crafty.e("Floor, 2D, DOM, Gravity, Color, ground")
+              .color("green")
+              .attr({w: width, h: 300, x: xAxis, y: 400});
       }
 
       function initLoggingWindow() {
@@ -201,8 +229,6 @@
           player: [0,2]
         });
         
-        Crafty.c("Floor", {});
-        //var floor = Crafty.e("Floor, 2D, DOM, Gravity, Color").color("green").attr({w: 3000, h: 300, x: 0, y: 400});
         Crafty.e("deadly, 2D").attr({w: 3400, h: 100, x: -200, y: 600});
         Crafty.e("finish, 2D, Color, DOM").color("blue").attr({w: 10, h: 150, x: 2500, y: 250});
         
