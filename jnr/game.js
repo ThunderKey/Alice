@@ -1,3 +1,54 @@
+API = {
+  //actors
+  walkLeft: function(distance, callback) {
+    return this.walk(0 - distance, callback);
+  },
+  walkRight: function(distance, callback) {
+    return this.walk(distance, callback);
+  },
+  // distance < 0 => going left, else going right
+  walk: function(distance, callback) {
+    var k = {key: Crafty.keys[distance < 0 ? "LEFT_ARROW" : "RIGHT_ARROW"]};
+    var p = EnvironmentTracker.player;
+    p.endPosition = p.x + this._distanceToPx(distance);
+    p.endPosCallback = function() {
+      p.trigger('KeyUp', k);
+      callback();
+    }
+
+    p.trigger('KeyDown', k);
+    return this;
+  },
+
+  jumpLeft: function(callback) {
+    this.jump('l', callback);
+  },
+  jumpRight: function(callback) {
+    this.jump('r', callback);
+  },
+  // direction is 'l' or 'r'
+  jump: function(direction, callback) {
+    var p = EnvironmentTracker.player;
+    
+    var sideKey = {key: Crafty.keys[direction == 'l' ? "LEFT_ARROW" : "RIGHT_ARROW"]};
+
+    p.jumpCallback = function() {
+      p.trigger('KeyUp', sideKey);
+      callback();
+    }
+
+    p.trigger('KeyDown', sideKey);
+    p._up = true; 
+  },
+
+  _pxToDistance: function(pixel) {
+    return pixel / 50;
+  },
+  _distanceToPx: function(distance) {
+    return distance * 50;
+  }
+};
+
 function writeInfo(msg) {
   EnvironmentTracker.logging_windows.info.text(msg);
 }
@@ -13,6 +64,7 @@ function restart() {
 
   Crafty.viewport.y = -100;
   Crafty.viewport.x = 50;
+  moveLoggingWindow(0);
 }
 
 function initMovement() {
@@ -20,6 +72,10 @@ function initMovement() {
     _speed: 3,
     _up: false,
     
+    endPosition: null,
+    endPosCallback: null,
+    jumpCallback: null,
+
     dead: false,
     die: function() {
       writeInfo("hit");
@@ -106,9 +162,20 @@ function initPlayer() {
               this.animate("walk_right", 3, -1);
             this.left = false;
           }
-          if(this.hit('solid')){
-              this.attr({x: from.x, y:from.y});
-              this._up = false;
+
+          if(this.hit('solid')) {
+            this.attr({x: from.x, y:from.y});
+            this._up = false;
+
+            if(this.jumpCallback != null) {
+              this.jumpCallback();
+            }
+          }
+
+          if(this.endPosition != null && Math.abs(this.x - this.endPosition) < 5) {
+            this.endPosCallback();
+            this.endPosition = null;
+            this.endPosCallback = null;
           }
         }
       })
@@ -144,9 +211,9 @@ function createBlocksAndGrounds() {
   var max = 2000;
   
   while(used < max) {
-    var ground_width = rand(100, 600);
+    var ground_width = rand(3, 12) * 50;
     createGround(ground_width, used);
-    used += ground_width + rand(50, 150);
+    used += ground_width + rand(1, 3) * 50;
   }
   createGround(3000 - used, used);
   
@@ -156,7 +223,7 @@ function createBlocksAndGrounds() {
   for(var i = 0; i < 15; i++){
     var currentX;
     do {
-      currentX = rand(0,45)*50+200;
+      currentX = rand(0,43)*50+200;
     } while(usedX.indexOf(currentX) != -1);
     usedX.push(currentX);
     
@@ -190,11 +257,20 @@ function createGround(width, xAxis) {
 }
 
 function initLoggingWindow() {
+  Crafty.c("LogText", {
+    init: function() {
+      this.requires("2D, DOM, Text");
+      this.attr({w: 300, h: 15});
+      this.css({"font": "10pt Arial"});
+      return this;
+    }
+  });
+
   w = EnvironmentTracker.logging_windows = {};
-  w.posx = Crafty.e("2D, DOM, Text").attr({w: 300, h: 15, y: 100}).css({"font": "10pt Arial"});
-  w.posy = Crafty.e("2D, DOM, Text").attr({w: 300, h: 15 , y: 115}).css({"font": "10pt Arial"});
-  w.block_number = Crafty.e("2D, DOM, Text").attr({w: 300, h: 15 , y: 130}).css({"font": "10pt Arial"});
-  w.info = Crafty.e("2D, DOM, Text").attr({w: 300, h: 15 , y: 145}).css({"font": "10pt Arial"});
+  w.posx = Crafty.e("LogText").attr({y: 100});
+  w.posy = Crafty.e("LogText").attr({y: 115});
+  w.block_number = Crafty.e("LogText").attr({y: 130});
+  w.info = Crafty.e("LogText").attr({y: 155});
   logSensorValues();
 }
 
@@ -236,7 +312,7 @@ function createGame() {
   });
   
   Crafty.e("deadly, 2D").attr({w: 3400, h: 100, x: -200, y: 600});
-  Crafty.e("finish, 2D, Color, DOM").color("blue").attr({w: 10, h: 150, x: 2500, y: 250});
+  Crafty.e("finish, 2D, Color, DOM").color("blue").attr({w: 10, h: 300, x: 2500, y: 100});
      
   createBlocksAndGrounds();
   
