@@ -42,7 +42,7 @@ API = {
   },
 
   //sensors
-  positionBLocks: function() {
+  positionBlocks: function() {
     var positions = [];
     for(id in EnvironmentTracker.blocks) {
       var block = EnvironmentTracker.blocks[id];
@@ -68,4 +68,32 @@ API = {
   win: function() {
     return EnvironmentTracker.player.won;
   },
+
+  distanceToGoal: function() {
+    var goal = this.positionGoal();
+    var me = this.positionMe();
+    return goal.x - me.x /*- me.width*/;
+  },
+
+  nearestBlock: function() {
+    return this._nearestX(this.positionBlocks(), 'x');
+  },
+
+  nearestHole: function() {
+    return this._nearestX(this.positionHoles(), 'startX');
+  },
+
+  _nearestX: function(items, key) {
+    var nearest = null;
+    var myX = this.positionMe().x;
+    for(i in items) {
+      var item = items[i];
+      //every, not just in front
+      //if(nearest == null || (myX - nearest.x > myX -item.x)) {
+      if(item[key] > myX && (nearest == null || (nearest[key]) > (item[key]))) {
+        nearest = item;
+      }
+    }
+    return nearest;
+  } 
 };
