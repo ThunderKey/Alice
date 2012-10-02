@@ -157,6 +157,8 @@ function initPlayer() {
     
 function createBlocksAndGrounds() {
   Crafty.c("Floor", {});
+  EnvironmentTracker.grounds = [];
+  EnvironmentTracker.gaps = [];
   
   var used = 0;
   var max = 2000;
@@ -164,7 +166,10 @@ function createBlocksAndGrounds() {
   while(used < max) {
     var ground_width = rand(3, 12) * 50;
     createGround(ground_width, used);
+    var gapCoord = {startX: used + ground_width};
     used += ground_width + rand(1, 3) * 50;
+    gapCoord.endX = used;
+    EnvironmentTracker.gaps.push(gapCoord);
   }
   createGround(3000 - used, used);
   
@@ -202,9 +207,11 @@ function createBlock(x, y) {
 }
 
 function createGround(width, xAxis) {
-  Crafty.e("Floor, solid, 2D, DOM, Gravity, Color, ground")
-        .color("green")
-        .attr({w: width, h: 300, x: xAxis, y: 400});
+  var ground = Crafty.e("Floor, solid, 2D, DOM, Gravity, Color, ground")
+                     .color("green")
+                     .attr({w: width, h: 300, x: xAxis, y: 400});
+  EnvironmentTracker.grounds.push(ground);
+  return ground;
 }
 
 function initLoggingWindow() {
@@ -263,7 +270,9 @@ function createGame() {
   });
   
   Crafty.e("deadly, 2D").attr({w: 3400, h: 100, x: -200, y: 600});
-  Crafty.e("finish, 2D, Color, DOM").color("blue").attr({w: 10, h: 300, x: 2500, y: 100});
+  EnvironmentTracker.finish = Crafty.e("finish, 2D, Color, DOM")
+        .color("blue")
+        .attr({w: 10, h: 300, x: 2500, y: 100});
      
   createBlocksAndGrounds();
   

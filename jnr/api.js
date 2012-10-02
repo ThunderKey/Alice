@@ -10,7 +10,7 @@ API = {
   walk: function(distance, callback) {
     var k = {key: Crafty.keys[distance < 0 ? "LEFT_ARROW" : "RIGHT_ARROW"]};
     var p = EnvironmentTracker.player;
-    p.endPosition = p.x + this._distanceToPx(distance);
+    p.endPosition = p.x + distance;
     p.endPosCallback = function() {
       p.trigger('KeyUp', k);
       callback();
@@ -41,10 +41,31 @@ API = {
     p._up = true; 
   },
 
-  _pxToDistance: function(pixel) {
-    return pixel / 50;
+  //sensors
+  positionBLocks: function() {
+    var positions = [];
+    for(id in EnvironmentTracker.blocks) {
+      var block = EnvironmentTracker.blocks[id];
+      positions.push({x: block.x, y: block.y});
+    }
+    return positions;
   },
-  _distanceToPx: function(distance) {
-    return distance * 50;
-  }
+  positionHoles: function() {
+    return EnvironmentTracker.gaps;
+  },
+  positionMe: function() {
+    var p = EnvironmentTracker.player;
+    return {x: p.x, y: p.y};
+  },
+  positionGoal: function() {
+    var goal = EnvironmentTracker.finish;
+    return {x: goal.x, y: goal.y};
+  },
+
+  death: function() {
+    return EnvironmentTracker.player.dead;
+  },
+  win: function() {
+    return EnvironmentTracker.player.won;
+  },
 };
