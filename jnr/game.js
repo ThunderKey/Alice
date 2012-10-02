@@ -1,54 +1,3 @@
-API = {
-  //actors
-  walkLeft: function(distance, callback) {
-    return this.walk(0 - distance, callback);
-  },
-  walkRight: function(distance, callback) {
-    return this.walk(distance, callback);
-  },
-  // distance < 0 => going left, else going right
-  walk: function(distance, callback) {
-    var k = {key: Crafty.keys[distance < 0 ? "LEFT_ARROW" : "RIGHT_ARROW"]};
-    var p = EnvironmentTracker.player;
-    p.endPosition = p.x + this._distanceToPx(distance);
-    p.endPosCallback = function() {
-      p.trigger('KeyUp', k);
-      callback();
-    }
-
-    p.trigger('KeyDown', k);
-    return this;
-  },
-
-  jumpLeft: function(callback) {
-    this.jump('l', callback);
-  },
-  jumpRight: function(callback) {
-    this.jump('r', callback);
-  },
-  // direction is 'l' or 'r'
-  jump: function(direction, callback) {
-    var p = EnvironmentTracker.player;
-    
-    var sideKey = {key: Crafty.keys[direction == 'l' ? "LEFT_ARROW" : "RIGHT_ARROW"]};
-
-    p.jumpCallback = function() {
-      p.trigger('KeyUp', sideKey);
-      callback();
-    }
-
-    p.trigger('KeyDown', sideKey);
-    p._up = true; 
-  },
-
-  _pxToDistance: function(pixel) {
-    return pixel / 50;
-  },
-  _distanceToPx: function(distance) {
-    return distance * 50;
-  }
-};
-
 function writeInfo(msg) {
   EnvironmentTracker.logging_windows.info.text(msg);
 }
@@ -126,7 +75,8 @@ function initMovement() {
           this.trigger('Moved', { x: this.x, y: this.y + jump });
         }
       }).bind("KeyDown", function () {
-          if (this.isDown("UP_ARROW") || this.isDown("W") || this.isDown("Z")) this._up = true;
+        if (this.isDown("UP_ARROW") || this.isDown("W") || this.isDown("SPACE"))
+          this._up = true;
       });
 
       return this;
@@ -157,7 +107,6 @@ function initPlayer() {
               this.animate("walk_left", 3, -1);
             this.left = true;
           }else if(from.x < this.x){
-            //this.addComponent("running_right");
             if(!this.isPlaying("walk_right"))
               this.animate("walk_right", 3, -1);
             this.left = false;
@@ -166,10 +115,6 @@ function initPlayer() {
           if(this.hit('solid')) {
             this.attr({x: from.x, y:from.y});
             this._up = false;
-
-            if(this.jumpCallback != null) {
-              this.jumpCallback();
-            }
           }
 
           if(this.endPosition != null && Math.abs(this.x - this.endPosition) < 5) {
@@ -201,6 +146,12 @@ function initPlayer() {
           }else{
             this.addComponent("standing_right");
           }
+      })
+      .bind('hit', function() {
+        if(this.jumpCallback != null) {
+          this.jumpCallback();
+          this.jumpCallback = null;
+        }
       });
 }
     
@@ -227,12 +178,12 @@ function createBlocksAndGrounds() {
     } while(usedX.indexOf(currentX) != -1);
     usedX.push(currentX);
     
-    createBlock(currentX, 360 - rand(0,1)*50);
+    createBlock(currentX + 10, 360 - rand(0,1)*50);
     if(rand(0,3) == 0) {
       nextX = currentX + 50;
       if(usedX.indexOf(nextX) == -1) {
         usedX.push(nextX);
-        createBlock(nextX, 360 - rand(1,2)*50);
+        createBlock(nextX + 10, 360 - rand(1,2)*50);
       }
     }
   }
