@@ -118,9 +118,10 @@ function initPlayer() {
           }
 
           if(this.endPosition != null && Math.abs(this.x - this.endPosition) < 5) {
-            this.endPosCallback();
+            cb = this.endPosCallback;
             this.endPosition = null;
             this.endPosCallback = null;
+            cb();
           }
         }
       })
@@ -179,7 +180,7 @@ function createBlocksAndGrounds() {
   var usedX = [];
         
   EnvironmentTracker.blocks = [];
-  for(var i = 0; i < 15; i++){
+  for(var i = 0; i < 0; i++){
     var currentX;
     do {
       currentX = rand(0,43)*50+200;
