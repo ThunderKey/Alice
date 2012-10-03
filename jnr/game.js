@@ -131,7 +131,10 @@ function initPlayer() {
         if(!this.won) this.win();
       })
       .bind('KeyDown', function(e) {
-        if (!this.isStopped() && e.key == Crafty.keys.UP_ARROW) {
+        if (!this.isStopped() && (
+            e.key == Crafty.keys.UP_ARROW ||
+            e.key == Crafty.keys.SPACE ||
+            e.key == Crafty.keys.W)) {
           if(this.left){
             this.addComponent("jumping_left");
           }else{

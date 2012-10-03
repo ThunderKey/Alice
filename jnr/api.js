@@ -45,8 +45,7 @@ API = {
   positionBlocks: function() {
     var positions = [];
     for(id in EnvironmentTracker.blocks) {
-      var block = EnvironmentTracker.blocks[id];
-      positions.push({x: block.x, y: block.y});
+      positions.push(this._getPosition(EnvironmentTracker.blocks[id]));
     }
     return positions;
   },
@@ -54,12 +53,11 @@ API = {
     return EnvironmentTracker.gaps;
   },
   positionMe: function() {
-    var p = EnvironmentTracker.player;
-    return {x: p.x, y: p.y};
+    return this._getPosition(EnvironmentTracker.player);
   },
   positionGoal: function() {
     var goal = EnvironmentTracker.finish;
-    return {x: goal.x, y: goal.y};
+    return this._getPosition(goal);
   },
 
   death: function() {
@@ -72,7 +70,7 @@ API = {
   distanceToGoal: function() {
     var goal = this.positionGoal();
     var me = this.positionMe();
-    return goal.x - me.x /*- me.width*/;
+    return goal.x - me.x - me.w;
   },
 
   nearestBlock: function() {
@@ -95,5 +93,14 @@ API = {
       }
     }
     return nearest;
-  } 
+  },
+
+  _getPosition: function(ele) {
+    return {
+      x: ele.x,
+      y: ele.y,
+      w: ele.w,
+      h: ele.h
+    };
+  }
 };
