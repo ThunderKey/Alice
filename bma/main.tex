@@ -1,0 +1,172 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Large Colored Title Article
+% LaTeX Template
+% Version 1.0 (15/8/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[DIV=calc, paper=a4, fontsize=11pt, twocolumn]{scrartcl}	 % A4 paper and 11pt font size
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[svgnames]{xcolor} % Enabling colors by their 'svgnames'
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{fix-cm}	 % Custom font sizes - used for the initial letter in the document
+\usepackage[utf8x]{inputenc}
+
+\usepackage{sectsty} % Enables custom section titles
+\allsectionsfont{\usefont{OT1}{phv}{b}{n}} % Change the font of all section commands
+
+\usepackage{fancyhdr} % Needed to define custom headers/footers
+\pagestyle{fancy} % Enables the custom headers/footers
+\usepackage{lastpage} % Used to determine the number of pages in the document (for "Page X of Total")
+
+% Headers - all currently empty
+\lhead{}
+\chead{}
+\rhead{}
+
+% Footers
+\lfoot{}
+\cfoot{}
+\rfoot{\footnotesize Page \thepage\ of \pageref{LastPage}} % "Page 1 of 2"
+
+\renewcommand{\headrulewidth}{0.0pt} % No header rule
+\renewcommand{\footrulewidth}{0.4pt} % Thin footer rule
+
+\usepackage{lettrine} % Package to accentuate the first letter of the text
+\newcommand{\initial}[1]{ % Defines the command and style for the first letter
+\lettrine[lines=3,lhang=0.3,nindent=0em]{
+\color{DarkGoldenrod}
+{\textsf{#1}}}{}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\usepackage{titling} % Allows custom title configuration
+
+\newcommand{\HorRule}{\color{DarkGoldenrod} \rule{\linewidth}{1pt}} % Defines the gold horizontal rule around the title
+
+\pretitle{\vspace{-30pt} \begin{flushleft} \HorRule \fontsize{50}{50} \usefont{OT1}{phv}{b}{n} \color{DarkRed} \selectfont} % Horizontal rule before the title
+
+\title{AI applied to a simple 2D environment} % Your article title
+
+\posttitle{\par\end{flushleft}\vskip 0.5em} % Whitespace under the title
+
+\preauthor{\begin{flushleft}\large \lineskip 0.5em \usefont{OT1}{phv}{b}{sl} \color{DarkRed}} % Author font configuration
+
+\author{Michael Gerber, Nicolas Ganz } % Your name
+
+\postauthor{\footnotesize \usefont{OT1}{phv}{m}{sl} \color{Black} % Configuration for the institution name
+BMS Zürich % Your institution
+
+\par\end{flushleft}\HorRule} % Horizontal rule after the title
+
+\date{} % Add a date here if you would like one to appear underneath the title block
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+\thispagestyle{fancy} % Enabling the custom headers/footers for the first page 
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+% The first character should be within \initial{}
+\initial{H}\textbf{ere is some sample text to show the initial in the introductory paragraph of this template article. The color and lineheight of the initial can be modified in the preamble of this document.}
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section*{Introduction}
+
+
+%------------------------------------------------
+
+\subsection*{Subsection 1}
+
+
+\begin{itemize}
+\item First item in a list 
+\item Second item in a list 
+\item Third item in a list
+\end{itemize}
+
+
+%------------------------------------------------
+
+\subsection*{Subsection 2}
+
+
+%------------------------------------------------
+
+\section*{What is AI?}
+
+This question has about as many answers as there are people studying artificial intelligence. Without getting too philosophical one could say that intelligence is defined by the efficiency of patterns used to solve problems in a complex environment and the ability to learn or generate new patterns by observing or testing.
+
+Man-made programs to solve such problems have been around for decades and as algorithm efficiency and computational power increases they get ever more powerful.
+
+An AI usually is directed towards one goal. This could mean solving a mathematical challenge most efficiently, finding patterns in huge amounts of data to categorize new sets of data or even to find smarter ways of learning.
+
+
+\section*{History of the Field}
+
+\section*{Technological Singularity}
+
+\newpage
+\section*{Real World Examples}
+
+\subsection*{Amazone Recommandations}
+Everyone knows the ``People who bought X also bought Y''-kind of recommandations online shops provide you with. Sometimes they are on the spot and other times they are as far off as they can be. The idea of course is to find patterns in customer interest which can be used to offer people things they are likely to buy.
+
+\subsection*{Google search algorithms}
+\subsection*{DARPA}
+\subsection*{Deep Blue}
+\subsection*{IBM Watson}
+
+\section*{Traditional AI vs Neural Networks}
+
+\section*{Some AI Algorithms in Detail}
+\subsection*{Graph Search}
+\subsection*{Beyas Networks}
+
+\[P(A|B)=\frac{P(B|A) * P(A)}{P(B)}\]
+
+\subsection*{Markov Decision Processes}
+\subsection*{Natural Language Learning}
+\subsection*{Particle Filters}
+\subsection*{Heuristics}
+\subsection*{Game Theory}
+
+
+\begin{description}
+\item[First] This is the first item
+\item[Last] This is the last item
+\end{description}
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
