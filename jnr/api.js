@@ -1,5 +1,7 @@
 API = {
-  //actors
+  // **********
+  // * actors *
+  // **********
   walkLeft: function(distance, callback) {
     return this.walk(0 - distance, callback);
   },
@@ -41,7 +43,9 @@ API = {
     p._up = true; 
   },
 
-  //sensors
+  // ***********
+  // * sensors *
+  // ***********
   positionBlocks: function() {
     var positions = [];
     for(id in EnvironmentTracker.blocks) {
@@ -102,5 +106,12 @@ API = {
       w: ele.w,
       h: ele.h
     };
+  },
+
+  // **********
+  // * events *
+  // **********
+  onRestart: function(callback) {
+    EnvironmentTracker.onRestart = callback;
   }
 };

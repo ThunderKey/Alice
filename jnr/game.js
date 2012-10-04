@@ -2,8 +2,11 @@ function writeInfo(msg) {
   EnvironmentTracker.logging_windows.info.text(msg);
 }
 
-EnvironmentTracker = {};
+EnvironmentTracker = {
+  onRestart: function(won) {}
+};
 function restart() {
+  var won = EnvironmentTracker.player.won;
   Crafty('player').destroy();
   Crafty('ground').destroy();
   Crafty('block').destroy();
@@ -14,6 +17,7 @@ function restart() {
   Crafty.viewport.y = -100;
   Crafty.viewport.x = 50;
   moveLoggingWindow(0);
+  EnvironmentTracker.onRestart(won);
 }
 
 function initMovement() {
@@ -180,7 +184,7 @@ function createBlocksAndGrounds() {
   var usedX = [];
         
   EnvironmentTracker.blocks = [];
-  for(var i = 0; i < 0; i++){
+  for(var i = 0; i < /*15*/0; i++){
     var currentX;
     do {
       currentX = rand(0,43)*50+200;
