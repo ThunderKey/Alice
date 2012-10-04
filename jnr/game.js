@@ -1,3 +1,6 @@
+if(typeof(ai) == "undefined") 
+  ai = false;
+
 function writeInfo(msg) {
   EnvironmentTracker.logging_windows.info.text(msg);
 }
@@ -78,7 +81,7 @@ function initMovement() {
           this._falling = true;
           this.trigger('Moved', { x: this.x, y: this.y + jump });
         }
-      }).bind("KeyDown", function () {
+      }).bind("KeyDown", function (data) {
         if (this.isDown("UP_ARROW") || this.isDown("W") || this.isDown("SPACE"))
           this._up = true;
       });
@@ -122,7 +125,7 @@ function initPlayer() {
           }
 
           if(this.endPosition != null && Math.abs(this.x - this.endPosition) < 5) {
-            cb = this.endPosCallback;
+            var cb = this.endPosCallback;
             this.endPosition = null;
             this.endPosCallback = null;
             cb();
@@ -157,8 +160,9 @@ function initPlayer() {
       })
       .bind('hit', function() {
         if(this.jumpCallback != null) {
-          this.jumpCallback();
+          var cb = this.jumpCallback;
           this.jumpCallback = null;
+          cb();
         }
       });
 }
@@ -184,7 +188,8 @@ function createBlocksAndGrounds() {
   var usedX = [];
         
   EnvironmentTracker.blocks = [];
-  for(var i = 0; i < /*15*/0; i++){
+  var numOfBlocks = (ai ? 0 : 15);
+  for(var i = 0; i < numOfBlocks; i++){
     var currentX;
     do {
       currentX = rand(0,43)*50+200;

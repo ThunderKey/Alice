@@ -10,6 +10,7 @@ function createNode(){
   Nodes.push(node);
   return node;
 }
+Running = false;
 Params = {
   jumpDistance: 132,
   actions: [
@@ -20,9 +21,16 @@ Params = {
     ]
 }
 function startAI(){
-  doPlay();
-  console.dir(Nodes);
-
+  start();
+  //console.dir(Nodes);
+  API.onRestart(function(won) {
+    if(!Running) {
+      stop(won);
+    } else {
+      stop(won);
+      start();
+    }
+  });
 }
 
 function similiarNode(compareTo){
@@ -31,52 +39,68 @@ function similiarNode(compareTo){
     if (Nodes[i] != compareTo){
       if(tn == null ||
           (Math.abs(Nodes[i].distanceFromNearestGround - compareTo.distanceFromNearestGround) < 
-          Math.abs(tn.distanceFromNearestGround - compareTo.distanceFromNearestGround))
+           Math.abs(tn.distanceFromNearestGround - compareTo.distanceFromNearestGround))
         ){
-        tn = Nodes[i];
-      }
+          tn = Nodes[i];
+        }
     }
   }
   return tn;
 }
 
 function getBestAction(node){
-  console.dir("Action");
-  ta = null
-    Object.keys(node.results).forEach(function(a) {
-      successorState = node.results[a];
-      if(successorState.distanceFromGoal < node.results[ta].distanceFromGoal){
-  console.dir(ta);
-        ta = a;
-      }
-    });
-  console.dir(ta);
+  //console.dir("Action");
+  ta = null;
+  Object.keys(node.results).forEach(function(a) {
+    successorState = node.results[a];
+    if(ta == null || successorState.distanceFromGoal < node.results[ta].distanceFromGoal){
+      //console.dir(ta);
+      ta = a;
+    }
+  });
+  //console.dir(ta);
   return ta;
 }
 
+function stop(won) {
+  Running = false;
+  //remember stuff
+}
+
+function start() {
+  Running = true;
+  doPlay();
+}
 
 function doPlay(){
   n = createNode();
-  console.dir(Nodes);
-  if(!n.won){
+  //console.dir(Nodes);
+  if(Running){
     sn = similiarNode(n);
     act = null
-    if (sn != null){
-      act = getBestAction(sn);
-    }
+      if (sn != null){
+        act = getBestAction(sn);
+      }
     if(act == null){
       act = Params.actions[rand(0,3)];
     }
-    if(act == 'walkRight' || act == 'walkLeft'){
+
+    API[act](function(){
+      n.results[act] = createNode();
+      doPlay();
+    }, 15);
+    /*if(act == 'walkRight' || act == 'walkLeft'){
+      console.debug('walk');
       API[act](15, function(){
         n.results[act] = createNode();
         doPlay();
       });
     }else{
-      API[act]( function(){
+      console.debug('jump');
+      API[act](function(){
         n.results[act] = createNode();
         doPlay();
       });
-    }
+    }*/
   }
 }

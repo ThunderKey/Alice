@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<head>
+<head>  
+    <script>ai = true;</script>
     <script type="text/javascript" src="crafty.js"></script>
     <script type="text/javascript" src="game.js"></script>
     <script type="text/javascript" src="api.js"></script>
+    <script type="text/javascript" src="ai.js"></script>
       <style>
         body, html { margin:0; padding: 0; overflow:hidden; font-family:Arial; font-size:20px }
         #cr-stage { color:white }
@@ -10,9 +12,12 @@
   </head>
   <body>
     <a href="https://github.com/ThunderKey/Alice" target="_blank">View on GitHub</a>
+    <button onclick="Running = false;">Stop</button>
+    <button onclick="if(!Running) { start(); }">Restart</button>
     <div id="info"></div>
     <script type="text/javascript">
       createGame();
+      startAI();
     </script>
   </body>
 </html>

@@ -2,14 +2,15 @@ API = {
   // **********
   // * actors *
   // **********
-  walkLeft: function(distance, callback) {
-    return this.walk(0 - distance, callback);
+
+  walkLeft: function(callback, distance) {
+    return this.walk(callback, 0 - distance);
   },
-  walkRight: function(distance, callback) {
-    return this.walk(distance, callback);
+  walkRight: function(callback, distance) {
+    return this.walk(callback, distance);
   },
   // distance < 0 => going left, else going right
-  walk: function(distance, callback) {
+  walk: function(callback, distance) {
     var k = {key: Crafty.keys[distance < 0 ? "LEFT_ARROW" : "RIGHT_ARROW"]};
     var p = EnvironmentTracker.player;
     p.endPosition = p.x + distance;
@@ -46,6 +47,7 @@ API = {
   // ***********
   // * sensors *
   // ***********
+  
   positionBlocks: function() {
     var positions = [];
     for(id in EnvironmentTracker.blocks) {
@@ -111,6 +113,7 @@ API = {
   // **********
   // * events *
   // **********
+
   onRestart: function(callback) {
     EnvironmentTracker.onRestart = callback;
   }
