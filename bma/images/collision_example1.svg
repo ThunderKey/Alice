@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg3757"
+   version="1.1"
+   inkscape:version="0.47 "
+   sodipodi:docname="collision_example1.svg">
+  <defs
+     id="defs3759">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective3765" />
+    <inkscape:perspective
+       id="perspective3775"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4336"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4358"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4401"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4429"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="319.19062"
+     inkscape:cy="806.24052"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1058"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3762">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#c87137;fill-opacity:1;stroke:#000000;stroke-width:0.27837268;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       id="rect2816"
+       width="63.628036"
+       height="63.628036"
+       x="214.13919"
+       y="110.59496"
+       ry="0"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 366.80676,143.88253 347.95512,128.37338"
+       id="path3630"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 366.80674,143.77821 347.9551,159.28736"
+       id="path3630-7"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       width="71.809929"
+       height="14.703301"
+       id="image3682"
+       x="283.69876"
+       y="96.856651"
+       xlink:href="C:\Program Files (x86)\Inkscape\.\inkscape_pasted_image_20121003_221502.png"
+       sodipodi:absref="C:\Program Files (x86)\Inkscape\.\inkscape_pasted_image_20121003_221502.png" />
+    <text
+       xml:space="preserve"
+       style="font-size:21.34611702px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="283.47421"
+       y="93.774971"
+       id="text3686"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3688"
+         x="283.47421"
+         y="93.774971">Force F</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 277.64451,143.49488 87.45715,0"
+       id="path3816"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:#c87137;fill-opacity:1;stroke:#000000;stroke-width:0.27837268;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       id="rect2816-7"
+       width="63.628036"
+       height="63.628036"
+       x="382.45041"
+       y="110.59496"
+       ry="0"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:#c87137;fill-opacity:1;stroke:#000000;stroke-width:0.27837268;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       id="rect2816-3"
+       width="63.628036"
+       height="63.628036"
+       x="318.13919"
+       y="223.59496"
+       ry="0"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 535.09249,255.53041 516.24085,240.02126"
+       id="path3630-0"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 535.09247,255.42609 -18.85164,15.50915"
+       id="path3630-7-0"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       width="71.809929"
+       height="14.703301"
+       id="image3682-4"
+       x="-311.36584"
+       y="211.07597"
+       xlink:href="C:\Program Files (x86)\Inkscape\.\inkscape_pasted_image_20121003_221502.png"
+       sodipodi:absref="C:\Program Files (x86)\Inkscape\.\inkscape_pasted_image_20121003_221502.png"
+       transform="scale(-1,1)" />
+    <text
+       xml:space="preserve"
+       style="font-size:21.34611702px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="225.33136"
+       y="207.99428"
+       id="text3686-8"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3688-3"
+         x="225.33136"
+         y="207.99428">Force F / 2</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 445.93024,255.14276 87.45715,0"
+       id="path3816-0"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:#c87137;fill-opacity:1;stroke:#000000;stroke-width:0.27837268;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       id="rect2816-7-1"
+       width="63.628036"
+       height="63.628036"
+       x="382.45041"
+       y="223.59496"
+       ry="0"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 228.9903,255.27148 18.85164,-15.50915"
+       id="path3630-0-2"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 228.99032,255.16716 18.85164,15.50915"
+       id="path3630-7-0-9"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 318.15255,254.88383 -87.45715,0"
+       id="path3816-0-0"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       width="71.809929"
+       height="14.703301"
+       id="image3682-4-3"
+       x="448.10022"
+       y="207.04851"
+       xlink:href="C:\Program Files (x86)\Inkscape\.\inkscape_pasted_image_20121003_221502.png"
+       sodipodi:absref="C:\Program Files (x86)\Inkscape\.\inkscape_pasted_image_20121003_221502.png" />
+    <text
+       xml:space="preserve"
+       style="font-size:21.34611702px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="433.87564"
+       y="203.96681"
+       id="text3686-8-8"
+       inkscape:export-filename="C:\Users\Nicolas\Documents\GitHub\Alice\collision_example1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3688-3-8"
+         x="433.87564"
+         y="203.96681">Force F / 2</tspan></text>
+  </g>
+</svg>
