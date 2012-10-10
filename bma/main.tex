@@ -18,7 +18,7 @@
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\documentclass[DIV=calc, paper=a4, fontsize=11pt, twocolumn]{scrartcl}	 % A4 paper and 11pt font size
+\documentclass[DIV=calc, paper=a4, fontsize=11pt, twocolumn]{scrreprt}	 % A4 paper and 11pt font size
 
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 \usepackage[english]{babel} % English language/hyphenation
@@ -33,159 +33,309 @@
 \usepackage{sectsty} % Enables custom section titles
 \allsectionsfont{\usefont{OT1}{phv}{b}{n}} % Change the font of all section commands
 
-\usepackage{fancyhdr} % Needed to define custom headers/footers
-\pagestyle{fancy} % Enables the custom headers/footers
-\usepackage{lastpage} % Used to determine the number of pages in the document (for "Page X of Total")
-
-% Headers - all currently empty
-\lhead{}
-\chead{}
-\rhead{}
-
-% Footers
-\lfoot{}
-\cfoot{}
-\rfoot{\footnotesize Page \thepage\ of \pageref{LastPage}} % "Page 1 of 2"
-
-\renewcommand{\headrulewidth}{0.0pt} % No header rule
-\renewcommand{\footrulewidth}{0.4pt} % Thin footer rule
+\usepackage{soul} % for highlighting, underlining etc.
+\usepackage{hyperref} % for hyperlinks
+\usepackage{graphicx} % for graphics
+\usepackage{moreverb} % code snippets
 
 \usepackage{lettrine} % Package to accentuate the first letter of the text
 \newcommand{\initial}[1]{ % Defines the command and style for the first letter
-\lettrine[lines=3,lhang=0.3,nindent=0em]{
-\color{DarkGoldenrod}
-{\textsf{#1}}}{}}
+  \lettrine[lines=3,lhang=0.3,nindent=0em]{
+    \color{DarkGoldenrod}
+    {\textsf{#1}}}{}}
+
+%----------------------------------------------------------------------------------------
+%	LAYOUT SECTION
+%----------------------------------------------------------------------------------------
+
+    \usepackage{lastpage} % Used to determine the number of pages in the document (for "Page X of Total")
+    \usepackage{fancyhdr} % Needed to define custom headers/footers
+    \fancypagestyle{plain}{% Overwriting the plain, so the table of contents will use it too
+
+% Headers - all currently empty
+      \fancyheadoffset{0.5 cm}
+      \lhead{\nouppercase{\leftmark}}
+      \chead{Artificial Intelligence}
+      \rhead{\today}
+
+% Footers
+      \fancyfootoffset{0.5 cm}
+      \lfoot{Michael Gerber, Nicolas Ganz}
+      \cfoot{}
+      \rfoot{\footnotesize Page \thepage\ of \pageref{LastPage}} % "Page 1 of 2"
+
+      \addtolength{\topmargin}{10pt}
+      \addtolength{\textheight}{-40pt}
+      \setlength{\columnsep}{1.5cm}
+      \setlength{\columnseprule}{0.4pt}
+
+      \renewcommand{\headrulewidth}{0.4pt} % Thin header rule
+      \renewcommand{\footrulewidth}{0.4pt} % Thin footer rule
+    }
+
+    \pagestyle{plain}
+
+%----------------------------------------------------------------------------------------
+%	GLOSSARY SECTION
+%----------------------------------------------------------------------------------------
+
+        \usepackage[toc]{glossaries} % for the glossary
+        \makeglossaries
+
+        \newglossaryentry{ai}{
+          name={Artificial Intelligence (AI)},
+          description={is a program that learns and gains experience in doing an activity like a game.}
+        }
+
 
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
 
-\usepackage{titling} % Allows custom title configuration
+    \usepackage{titling} % Allows custom title configuration
 
-\newcommand{\HorRule}{\color{DarkGoldenrod} \rule{\linewidth}{1pt}} % Defines the gold horizontal rule around the title
+    \newcommand{\HorRule}{\color{DarkGoldenrod} \rule{\linewidth}{1pt}} % Defines the gold horizontal rule around the title
 
-\pretitle{\vspace{-30pt} \begin{flushleft} \HorRule \fontsize{50}{50} \usefont{OT1}{phv}{b}{n} \color{DarkRed} \selectfont} % Horizontal rule before the title
+    \pretitle{\vspace{-30pt} \begin{flushleft} \HorRule \fontsize{50}{50} \usefont{OT1}{phv}{b}{n} \color{DarkRed} \selectfont} % Horizontal rule before the title
 
-\title{AI applied to a simple 2D environment} % Your article title
+      \title{AI applied to a simple 2D environment} % Your article title
 
-\posttitle{\par\end{flushleft}\vskip 0.5em} % Whitespace under the title
+      \posttitle{\par\end{flushleft}\vskip 0.5em} % Whitespace under the title
 
-\preauthor{\begin{flushleft}\large \lineskip 0.5em \usefont{OT1}{phv}{b}{sl} \color{DarkRed}} % Author font configuration
+      \preauthor{\begin{flushleft}\large \lineskip 0.5em \usefont{OT1}{phv}{b}{sl} \color{DarkRed}} % Author font configuration
 
-\author{Michael Gerber, Nicolas Ganz } % Your name
+        \author{Michael Gerber, Nicolas Ganz } % Your name
 
-\postauthor{\footnotesize \usefont{OT1}{phv}{m}{sl} \color{Black} % Configuration for the institution name
-BMS Zürich % Your institution
+        \postauthor{\footnotesize \usefont{OT1}{phv}{m}{sl} \color{Black} % Configuration for the institution name
+        BMS Zürich % Your institution
 
-\par\end{flushleft}\HorRule} % Horizontal rule after the title
+        \par\end{flushleft}\HorRule} % Horizontal rule after the title
 
-\date{} % Add a date here if you would like one to appear underneath the title block
+        \date{} % Add a date here if you would like one to appear underneath the title block
 
 %----------------------------------------------------------------------------------------
 
-\begin{document}
+        \begin{document}
 
-\maketitle % Print the title
+        \begin{titlepage}
+          \thispagestyle{empty}
+          \maketitle % Print the title
+        \end{titlepage}
 
-\thispagestyle{fancy} % Enabling the custom headers/footers for the first page 
+        %\thispagestyle{plain}
 
+        \tableofcontents
 %----------------------------------------------------------------------------------------
 %	ABSTRACT
 %----------------------------------------------------------------------------------------
 
+        \chapter{Abstract}
 % The first character should be within \initial{}
-\initial{H}\textbf{ere is some sample text to show the initial in the introductory paragraph of this template article. The color and lineheight of the initial can be modified in the preamble of this document.}
+        \initial{H}\textbf{ere is some sample text to show the initial in the introductory paragraph of this template article. The color and line height of the initial can be modified in the preamble of this document.}
 
 %----------------------------------------------------------------------------------------
 %	ARTICLE CONTENTS
 %----------------------------------------------------------------------------------------
 
-\section*{Introduction}
+        \chapter{Introduction}
 
 
 %------------------------------------------------
 
-\subsection*{Subsection 1}
+        \section{Section 1}
 
 
-\begin{itemize}
-\item First item in a list 
-\item Second item in a list 
-\item Third item in a list
-\end{itemize}
-
-
-%------------------------------------------------
-
-\subsection*{Subsection 2}
+        \begin{itemize}
+          \item First item in a list 
+          \item Second item in a list 
+          \item Third item in a list
+        \end{itemize}
 
 
 %------------------------------------------------
 
-\section*{What is AI?}
-
-This question has about as many answers as there are people studying artificial intelligence. Without getting too philosophical one could say that intelligence is defined by the efficiency of patterns used to solve problems in a complex environment and the ability to learn or generate new patterns by observing or testing.
-
-Man-made programs to solve such problems have been around for decades and as algorithm efficiency and computational power increases they get ever more powerful.
-
-An AI usually is directed towards one goal. This could mean solving a mathematical challenge most efficiently, finding patterns in huge amounts of data to categorize new sets of data or even to find smarter ways of learning.
+        \section{Section 2}
 
 
-\section*{History of the Field}
+%------------------------------------------------
+        \chapter{Artificial Intelligence}
+        \section{What is AI?}
 
-\section*{Technological Singularity}
+        This question has about as many answers as there are people studying artificial intelligence. Without getting too philosophical one could say that intelligence is defined by the efficiency of patterns used to solve problems in a complex environment and the ability to learn or generate new patterns by observing or testing.
 
-\newpage
-\section*{Real World Examples}
+        Man-made programs to solve such problems have been around for decades and as algorithm efficiency and computational power increases they get ever more powerful.
 
-\subsection*{Amazone Recommandations}
-Everyone knows the ``People who bought X also bought Y''-kind of recommandations online shops provide you with. Sometimes they are on the spot and other times they are as far off as they can be. The idea of course is to find patterns in customer interest which can be used to offer people things they are likely to buy.
-
-\subsection*{Google search algorithms}
-\subsection*{DARPA}
-\subsection*{Deep Blue}
-\subsection*{IBM Watson}
-
-\section*{Traditional AI vs Neural Networks}
-
-\section*{Some AI Algorithms in Detail}
-\subsection*{Graph Search}
-\subsection*{Beyas Networks}
-
-\[P(A|B)=\frac{P(B|A) * P(A)}{P(B)}\]
-
-\subsection*{Markov Decision Processes}
-\subsection*{Natural Language Learning}
-\subsection*{Particle Filters}
-\subsection*{Heuristics}
-\subsection*{Game Theory}
+        An AI usually is directed towards one goal. This could mean solving a mathematical challenge most efficiently, finding patterns in huge amounts of data to categorize new sets of data or even to find smarter ways of learning.
 
 
-\section*{Physics Engine}
-A physics engine is able to recreate an entire physical system like our world. The gravity is the biggest part to cover. There are less and more accurate engines. In some the falling objects get faster or the objects can break when the fall on a solid ground.
-\subsection*{Gravity Example}
-A block gets thrown horizontally with the force F. This block has now the force from the throw (horizontally) and from the gravity (vertically).
-\subsection*{Collision Example}
-This scenario is without gravity. A block gets thrown horizontally with the force F and collides with another, steady one with the same size and weight. After the collision the first block will fly back with half the force, while the other one gets pushed away with the other half of the force.
+        \section{History of the Field}
 
-But let's not go any further in this topic. Even though it is a really interesting topic, it is too extensive to go into the details.
-The physics engines are mostly common in animated films and video games. 
+        \section{Technological Singularity}
 
-For that would take too much time to create an own physics engine, we decided to use the open source engine Crafty. 
+        \newpage
+        \section{Real World Examples}
 
-\section*{The Game}
+        \subsection{Amazone Recommandations}
+        Everyone knows the ``People who bought X also bought Y''-kind of recommandations online shops provide you with. Sometimes they are on the spot and other times they are as far off as they can be. The idea of course is to find patterns in customer interest which can be used to offer people things they are likely to buy.
 
-\section*{Application Programming Interface (API)}
+        \subsection{Google search algorithms}
+        \subsection{DARPA}
+        \subsection{Deep Blue}
+        \subsection{IBM Watson}
 
-\section*{Our Artificial Intelligence (AI)}
+        \section{Traditional AI vs Neural Networks}
+
+        \newpage
+        \section{Some AI Algorithms in Detail}
+        \subsection{Graph Search}
+        \subsection{Beyas Networks}
+
+        \[P(A|B)=\frac{P(B|A) * P(A)}{P(B)}\]
+
+        \subsection{Markov Decision Processes}
+        \subsection{Natural Language Learning}
+        \subsection{Particle Filters}
+        \subsection{Heuristics}
+        \subsection{Game Theory}
+
+        \chapter{Project}
+
+        What do we need to create a 2 dimensional jump and run game? First of all we need a physics engine to recreate a realistic environment. Then we need a game engine to build our game on. Lastly we need the game itself.
+        Now we need an AI. How do we connect the AI with the game? That's where the Application Programming Interface (API) steps in. With this connection the AI can easily read the environment and move the player. So we ``just'' need the algorithms.
+
+        \section{Physics Engine}
+        A physics engine is able to recreate an entire physical system like our world. They are mostly common in animated films, scientific experiments and video games. The gravity is the biggest part to cover. There are less and more accurate engines. In some the falling objects get faster or the objects can break when they fall on a solid ground.
+
+        \subsection{Gravity Example}
+        A block gets thrown horizontally with the force F. This block has now the force from the throw (horizontally) and from the gravity (vertically).\\\\
+        \includegraphics{images/gravity_example1.png}
+
+        \subsection{Collision Example}
+        This scenario is without gravity. A block gets thrown horizontally with the force F and collides with another, steady one with the same size and weight. After the collision the first block will fly back with half the force, while the other one gets pushed away with the other half of the force.\\\\
+        \includegraphics{images/collision_example1.png}
+
+        \subsection{Types of Physics Engines}
+        There are two main types of physics engines. The high-precision and the real-time engines:
+        \begin{description}
+          \item[high-precision] This type of engine is used for exact copies of a physical system. They are mostly common for animations that must be very precise like scientific studies or animated films. It does not matter in this animations how many resources where used while rendering because you can let the machine run for many hours rendering the world and than analyze the result at the end.\\
+            To wrap it up: Those engines need much processing powers but are very precise. \ul{Quality before quantity}.
+          \item[real-time] This type of engine is used for interactive animations like video games. The artificial physics must be calculated immediately. Unlike the high-precision engines this type of engine does not need much processing power, for it is minimized.\\
+            To wrap it up: The real-time engines do not need much processing power but are not very accurate. \ul{Quantity before quality}.
+        \end{description}
+
+        \subsection{What do we need?}
+        \begin{description}
+          \item[collision] We need to be able to check for a collision between the player and a block above the ground.
+          \item[gravity] We need to be able to use gravity to jump and fall down. 
+          \item[real-time] We are creating a game, so we need in the first place a fast engine.
+        \end{description}
+        \subsection{Setting Boundaries}
+        But let us stop here. Even though it is a really interesting topic, it is too extensive to go into the details. If you would like to know more, there are plenty of comprehensive studies about physics engines.
+        \newpage
+        \section{Game Engine}
+        We want the physics engine to create a game. But how can one do this? All by himself? No, we need to find a link between the game and the physics engine. This is where the game engine has a turn. It offers the opportunity never to touch the physics engine and to make the step from a world with just moving objects to a world, controlled by a human.
+        \subsection{What does a Game Engine?}
+        \begin{itemize}
+          \item It unburdens the interaction between the human's controls like a keystroke or a mouse click and the animations that can be seen on the display.
+          \item It eases the animations of the objects. For example when the player walks then should the character animate this movement.
+          \item It implements the element of sound. With this feature you can easily add background music and/or sound effects.
+          \item They are mostly specialized on 2D or 3D worlds. 3D worlds are way more complicated but they are more realistic.
+          \item They are either built for a specific platform or they can compile the same source code for multiple platforms. For example if it supports multiple platforms you can create a game and run it on Windows, Linux, Xbox and PlayStation.
+          \item Some engines even include a AI system to help building one. They often helps with the data logistics and sensor access.
+        \end{itemize}
+
+        \subsection{Examples of Game Engines}
+        \begin{description}
+          \item[CryENGINE] A engine created by Crytek. It runs on PS3, Xbox 360 and PC. It has an advanced AI system with sensors like sight and hearing. The games Crysis, FarCry and Warface are the most famous of many.
+          \item[Unreal Engine] A engine created by Epic Games. It runs on PC, PS3, Xbox 360, Wii U, PSVITA, Android, iOS and Flash. The Unreal AI is also advanced and includes a special navigation mesh system to optimize the performance and memory usage. Dishonored, Gears of War, Batman: Arkham City and Mass Effect are the best examples for this engine.
+          \item[Anvil] Until 2006 it was known as Scimitar and is created by Ubisoft. It runs on PC, PS3, Xbox 360, Wii U and PSVITA. Prince of Persia, Assassin's Creed and Tom Clancy's Rainbow 6: Patriots are the most known examples for this engine.
+          \item[IW Engine] A engine created by Infinity Ward. It runs on PC, PS3, Xbox 360, Wii and Wii U. The complete Call of Duty series expect the first one is based on this engine.
+          \item[Blender] This is the most popular open source game engine. 
+        \end{description}
+
+        \subsection{What do we need?}
+        We don't need a complex game engine for we are creating a simple, 2 dimensional game. It should just cover the basic necessities like:
+        \begin{itemize}
+          \item interaction between user interface and animations
+          \item animations for the objects
+          \item sound implementations
+          \item built for PC only should be sufficient
+          \item 2 dimensional
+        \end{itemize}
+        \newpage
+        \section{The Game}
+        For it would take too much time to create an own physics and game engine, we decided to use the open source engine Crafty. It is based on the programming language JavaScript allowing the game to run in a modern web browser.
+
+        \subsection{Goal}
+        We want to create a game with this specifications:
+        \begin{itemize}
+          \item 2 dimensional
+          \item jump and run
+          \item blocks to jump on
+          \item gaps in the floor to fall down
+          \item randomly generated
+          \item generator ensures that the game is solvable
+          \item finish line at the end of the parcour
+          \item die from falling down
+          \item win from reaching the finish line
+          \item after winning or dying a restart of the game
+        \end{itemize}
+        \subsection{Composition}
+        We used a event-driven development architecture. That means that the engine triggers events and we define what should happen.\\
+        Here is the main structure of the game in a theoretically programming language:
+        \begin{verbatimtab}
+  When the player hits a solid object:
+    The player stops moving
+
+  When the player hits a deadly area:
+    The player dies
+    Restart the game
+
+  When the player hits the finish line:
+    The player wins
+    Restart the game
+        \end{verbatimtab}
 
 
-\begin{description}
-\item[First] This is the first item
-\item[Last] This is the last item
-\end{description}
+        \section{Application Programming Interface (API)}
+
+        \section{Our Artificial Intelligence (AI)}
+
+
+        %\begin{description}
+        %  \item[First] This is the first item
+        %  \item[Last] This is the last item
+        %\end{description}
 
 
 %----------------------------------------------------------------------------------------
 
-\end{document}
+        \chapter{Sum up}
+
+
+        \chapter{Sources and Glossary}
+
+        \section{Sources}
+        \begin{description}
+          \item[Physics Engines] \hfill \\
+            \begin{itemize}
+              \item \href{http://en.wikipedia.org/wiki/Physics_engine}{Physics engine - Wikipedia}
+            \end{itemize}
+          \item[Game Engines] \hfill \\
+            \begin{itemize}
+              \item \href{http://en.wikipedia.org/wiki/Game_engine}{Game engine - Wikipedia}
+              \item \href{http://www.crytek.com/cryengine}{CryENGINE $|$ Crytek}
+              \item \href{http://www.unrealengine.com}{Game Engine Technology by Unreal}
+              \item \href{http://en.wikipedia.org/wiki/Anvil_(game_engine)}{Anvil (game engine) - Wikipedia}
+              \item \href{http://en.wikipedia.org/wiki/IW_engine)}{IW engine - Wikipedia}
+            \end{itemize}
+          \item[The Game] \hfill \\
+            \begin{itemize}
+              \item \href{http://craftyjs.com/}{Crafty - Javascript Game Engine}
+            \end{itemize}
+        \end{description}
+
+        \printglossary%[type=main,title={Glossary},toctitle={Glossary}]
+        \addcontentsline{toc}{section}{Glossary}
+
+        \end{document}
