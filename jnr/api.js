@@ -88,13 +88,13 @@ API = {
   },
 
   _nearestX: function(items, key) {
-    var nearest = null;
+    var nearest = {startX: 100000, endX: 100000};
     var myX = this.positionMe().x;
     for(i in items) {
       var item = items[i];
       //every, not just in front
       //if(nearest == null || (myX - nearest.x > myX -item.x)) {
-      if(item[key] > myX && (nearest == null || (nearest[key]) > (item[key]))) {
+      if(item[key] > myX && (nearest[key]) > (item[key])) {
         nearest = item;
       }
     }

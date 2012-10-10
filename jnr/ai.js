@@ -3,8 +3,9 @@ function createNode(){
   node = {
     distanceFromGoal: API.distanceToGoal(),
     //  distanceFromNearestBlock: API.nearestBlock().x - API.positionMe().x,
-    distanceFromNearestGround: API.nearestHole().endX - API.positionMe().x,
+    distanceFromNearestGround: API.nearestHole().endX - API.positionMe().x ,
     won: API.win(),
+    dead: API.death(),
     results: {}
   }
   Nodes.push(node);
@@ -15,9 +16,9 @@ Params = {
   jumpDistance: 132,
   actions: [
     'jumpRight',
-  'jumpLeft',
-  'walkRight',
-  'walkLeft'
+//  'jumpLeft',
+  'walkRight'
+//  'walkLeft'
     ]
 }
 function startAI(){
@@ -45,6 +46,9 @@ function similiarNode(compareTo){
         }
     }
   }
+  if(tn != null){
+    console.dir(Math.abs(tn.distanceFromNearestGround - compareTo.distanceFromNearestGround));
+  }
   return tn;
 }
 
@@ -53,7 +57,9 @@ function getBestAction(node){
   ta = null;
   Object.keys(node.results).forEach(function(a) {
     successorState = node.results[a];
-    if(ta == null || successorState.distanceFromGoal < node.results[ta].distanceFromGoal){
+    if(( successorState.dead == false &&
+        successorState.distanceFromGoal < node.distanceFromGoal) && 
+      (ta == null || successorState.distanceFromGoal < node.results[ta].distanceFromGoal)){
       //console.dir(ta);
       ta = a;
     }
@@ -82,7 +88,7 @@ function doPlay(){
         act = getBestAction(sn);
       }
     if(act == null){
-      act = Params.actions[rand(0,3)];
+      act = Params.actions[rand(0,1)];
     }
 
     API[act](function(){
