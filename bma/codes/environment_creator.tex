@@ -1,0 +1,18 @@
+\begin{verbatimtab}
+Define the start point
+Until the whole width of the field is used:
+  Set a random end point
+  Create a ground from the start to end point
+  Get a random gap width (1, 2 or 3)
+  Set the start point: end point + gap width
+
+15 times:
+  Until the x-coordinate is unique:
+    Generate random x-coordinate
+
+  Get a random height of 1 or 2
+  Generate the block from x and the height
+
+  With a probability of 3:
+    Generate a next block with the height 3
+\end{verbatimtab}
