@@ -77,12 +77,42 @@ An AI usually is directed towards one goal. This could mean solving a mathematic
 \newpage
 \section{Real World Examples}
 
-\subsection{Amazone Recommandations}
-Everyone knows the ``People who bought X also bought Y''-kind of recommandations online shops provide you with. Sometimes they are on the spot and other times they are as far off as they can be. The idea of course is to find patterns in customer interest which can be used to offer people things they are likely to buy.
+\subsection{Amazon Recommendations}
+Everyone knows the ``People who bought X also bought Y''-kind of recommendations online shops provide you with. Sometimes they are spot on and other times they are as far off as they can be. The idea of course is to find patterns in customer interest which can be used to offer people things they are likely to buy thereby increasing profit.
 
-\subsection{Google search algorithms}
-\subsection{DARPA}
+So how do they work? It is all about finding similarities in data. In the case of products you have attributes like cost, size, style, manufacturer, etc. that let classify the product. Yet taken for themselves they are close to useless because two products that are similar in size and cost might not have anything in common at all. It's even worse. Imagine two lamps that have almost the same price, the same size and the same style. What's the probability that someone who bought the one lamp would also want to buy the other? Close to zero. Now why is that? For one thing it's unlikely that someone needs two lamps. It's even less likely that they would need two almost identical lamps. So apart from flat stats about a product one needs to take into account the nature of the product to make good recommendations. An example of such would be matching light bulbs for the lamp. 
+This tells us two things. First we need to categorize a product. Not only in it's use (e.g. lamp, chair, table, clock) but also in what frequency demand for it arises. So for example one would like to buy a new shirt every month whereas a new computer is only required every few years. The second thing is that there are certain items which depend on other items to function. A coffee machine needs filters, a toy car needs batteries and a lamp needs light bulbs. Hence to make a smart suggestion one would link those items one way so that buying a laptop would yield to recommendation of a mouse but buying cat food would not recommend acquiring a new feline companion.
+
+This probably all sounds perfectly reasonable. Every halfway decent online shop should be capable handling categories and dependencies between products. Since the assignment of such seems more or less obvious even to an intern why not just hire some of those to do it? It doesn't require an expensive AI to figure out that it would be a good idea to recommend "Harry Potter" part two to someone who bought part one. Yet if those where to only clues to go on the list of suggestions would be pretty short for most products. To make matters worse: Since those types of relations are so obvious, it's likely the customer thought of them already so they don't yield as much additional sales as "smart" recommendations would. This is where the AI algorithms come in.
+
+Imagine what a resale company could do if they understood their customer's taste. If they knew what style of clothing she likes, whether she lives near a beach and thus is more likely to buy a new bathing suit in spring or when her mothers birthday was so they could recommend gifts for older women at that time of year. Admittedly these examples might are little extreme yet the efforts of the so called data miners definitely go in that direction. These three examples have been picked for a reason because they each depend on different types of data.
+
+The style for example can be derived from the clothes the customer has bought in the past. From those the retailer could categorize his customers into groups that appear to like the same products and recommend things person A from this group bought to person B. Of course there is more to it than that. For example one needs to filter out noise which may be a piece of clothing a customer bought for someone else and thus does not match the pattern. Now an especially smart AI could even make a connection between such purchases and the friend or family member they where meant to. This data then could be used for a variety of further predictions about the customers buying behavior.
+
+The fact whether someone lives near a beach (or swimming pool for that matter) can be easily determined by matching the IP address from which requests to the store website were made to the corresponding location. There is a lot more of this type of information that one can easily read from the web request like browser type, mobile phone model, referring website and by matters of recurring visits from different locations even estimates about the customer's place of work or their boyfriend's address. Now this type of information is only as useful as one is able to make sense of it. This is the true strength of an AI because it can find patterns in data that no one has been looking for so far.
+
+\subsection{Web Search Algorithms}
+
+In web search it is even more important than with large selections of products to have an automated way to make precise estimations about the value of something to someone. Furthermore the search provider not only wants to establish a prediction about how likely a person is to be looking for a certain web page but also about how likely he or she is to be looking for it right now. A lot of things factor into this like previously visited websites, behavior in choosing links and probably over a thousand other data points that might have been collected about a person. Yet even if there is no previous information about a search engine user available they can still make predictions based on the location, language and outside factors. An example of this might be the following scenario:
+
+A user sits down in a Boston coffee shop using a browser, the signature of which has been modified to prevent it from being tracked back to that certain individual, to access her search provider of choice. She types in the word "dolphins". Now the first assumptions is that she is looking for the marine mammals. Yet the night before the football team by the same name might have played which would vastly improve the relevance of last nights game results. This increase of relevance can be justified by the fact that the user has set her language preference to American English which makes it far more likely that she is interested in the score than someone with a preference for French would be. But this isn't everything that is relevant to the search. Assuming that a band called "The Dolphins" is playing this week in Boston would make the band's website and a ticket sales site a lot more relevant to this search then it would be for someone from San Francisco.
+
+Again this example shows how a shift in relevance might be obvious if pointed out but is extremely hard to predict for a human. Artificial intelligence can look at changes in user behavior (like increased requests to "The Dolphins" band website from Boston) and smartly adjust the ranking of certain websites. Of course this is an oversimplification of the problem but it shows nicely the basic idea of using AI to find patterns in changing data.
+
+\subsection{DARPA Challenges}
+
+The Defense Advanced Research Projects Agency has funded prize competitions that reward advances in research fields relevant to the Department of Defense. The initial challenge was to build autonomous ground vehicles or "self-driving cars". It was called the DARPA Grand Challenge and was first held in 2004. The goal was to build an autonomous vehicle that could drive the 240 km route through the desert fastest. None of the robot vehicles that entered the contest was able to complete the challenge. The one that performed best only finished five percent of the route before getting hung up on a rock. Therefore the event was repeated in 2005.
+
+The second time around five vehicles were able to finish the race. With the team from Stanford University finishing first. 
+
+In 2007 the DARPA Urban Challenge has been held requiring the vehicles to finish a 96 km course in an urban area while obeying traffic regulations and interacting with human drivers.
+
+Currently Google is developing a driverless car which has already driven 300'000 miles without an accident. The project is led by Sebastian Thrun who also was head of the Stanford team that won the 2005 DARPA Grand Challenge.
+
 \subsection{Deep Blue}
+
+In 1997 the IBM chess computer Deep Blue famously defeated the world champion Garry Kasparov.
+
 \subsection{IBM Watson}
 
 \section{Traditional AI vs Neural Networks}
