@@ -75,7 +75,9 @@ An AI usually is directed towards one goal. This could mean solving a mathematic
 \section{Technological Singularity}
 
 \newpage
-\section{Real World Examples}
+\section{Real World Applications}
+
+Artificial Intelligence Technology 
 
 \subsection{Amazon Recommendations}
 Everyone knows the ``People who bought X also bought Y''-kind of recommendations online shops provide you with. Sometimes they are spot on and other times they are as far off as they can be. The idea of course is to find patterns in customer interest which can be used to offer people things they are likely to buy thereby increasing profit.
@@ -107,24 +109,67 @@ The second time around five vehicles were able to finish the race. With the team
 
 In 2007 the DARPA Urban Challenge has been held requiring the vehicles to finish a 96 km course in an urban area while obeying traffic regulations and interacting with human drivers.
 
-Currently Google is developing a driverless car which has already driven 300'000 miles without an accident. The project is led by Sebastian Thrun who also was head of the Stanford team that won the 2005 DARPA Grand Challenge.
+Currently Google is developing a driverless car which has already driven 300'000 miles without an accident. The project is led by Sebastian Thrun who also was the head of the Stanford team that won the 2005 DARPA Grand Challenge.
 
 \subsection{Deep Blue}
 
-In 1997 the IBM chess computer Deep Blue famously defeated the world champion Garry Kasparov.
+In 1997 the IBM chess computer Deep Blue famously defeated the world champion Garry Kasparov. 
 
 \subsection{IBM Watson}
 
 \section{Traditional AI vs Neural Networks}
 
+\section{Classification of AI problems}
+
+There are four major attributes to an AI problem. Each of them has severe impact on how one approaches to solve that given problem.
+\begin{description}
+\item Firstly there is the question of observability. Some environments are {\bf fully observable} while others are only {\bf partially observable}.
+\item Secondly there is the factor of randomness. An environment can be completely {\bf deterministic} which means that taking an action always result in the expected state or {\bf stochastic}. In the latter case there is chance involved in determining the outcome of an action. A good example for this would be a game that requires one to roll dice.
+\item Thirdly a problem might either be {\bf discrete} or {\bf continuous}. The former one meaning that there is a finite number of things to do and things to observe and the latter meaning that there is a factor to the problem that is infinite and has to be handled accordingly.
+\item Fourthly the problems environment can be {\bf benign} or {\bf adversarial} which would mean that there are factors to it that are actively contradicting the AI's objective by taking actions that prevent it from achieving its goals. Most games are of adversarial nature because in order to succeed each player needs to take actions that make it harder for his opponents to win.
+\end{description}
+
 \newpage
-\section{Some AI Algorithms in Detail}
-\subsection{Graph Search}
-\subsection{Beyas Networks}
+\section{Important AI Algorithms in Detail}
+\subsection{Tree Search}
+
+In artificial intelligence many problems can be represented as trees. The first node of that tree is the initial state of the problem. From that state different actions can be taken which lead to new states. A good example of this is the game of Tic Tac Toe.
+
+\begin{figure}[H]
+  \includegraphics[width=0.45\textwidth]{images/tree_search_tic_tac_toe.png}
+  \caption[\url{http://en.wikipedia.org/wiki/Tic-tac-toe}]{Tree representation of Tic Tac Toe turns from Wikipedia}
+\end{figure}
+
+There are different approaches for searching through trees each with their respective advantages and problems. Without additional knowledge about the situation the choice is between breadth-first search and depth-first search. The former one expanding always on the least explored path (broad) whereas the latter always expands the best explored (deepest) path. 
+
+At the example of Tic Tac Toe this would mean that breadth-first search would look at all the nine first turn moves, evaluating whether they result in a winning state (which of course none of them do). Next it would look at the eight resulting states the opponent's turn could have put the game in for all of those nine states. This this result in another seventy-two nodes being expanded without any of them possibly being a winning state. The first winning state could occur in turn five which means that 26'132'625 states need to be calculated and evaluated. Yet since wins in the fifth turn are only possible if the opponent is playing badly on purpose it is far more likely that the tree has to be calculated to the 7th or even ninth turn.
+
+Now depth-first search on the other hand would just pick one first turn move and expand on one of the possibly resulting second turn moves. This process is repeated until a final state is reached, which means that there are no actions that can be taken to transition this state into another. Final states in Tic Tac Toe are wins, loses and ties. After depth-first search reached a final state it backs up to the furthest expanded node and takes another action from that state.
+
+In a game neither of those search methods is preferable because due to the adversarial nature of the game one always has to expand every possible action the opponent could take from a state in order to determine whether that state is "good" or "bad". If there is additional information available (like rules to this game) the AI can be taught smarter tree search algorithms. For example one could teach it to see certain patterns in game states which indicate that a state is preferable or not. A depth-first search that chooses nodes to expand on an estimated value of the resulting state instead of doing so randomly is called the A* algorithm.
+
+\subsection{Bayes' Networks}
+
+Often the problem an AI faces is stochastic and randomness suddenly plays a big role in choosing smart actions. Using probability to make decisions is a rather simple process when all the numbers are available. It does not take artificial intelligence to figure out that an action with a 90 percent chance of success is to be preferred to one with just 40 percent. But if there are multiple events whose chance of occurring depend on each other and not all of them are observable it gets trickier.
+
+As an example of such a problem we assume a machine that can tell us the whether there will be an earthquake today or not. But this machine is faulty and in one out of six cases it lies. Now we know from statistics 0.03 is the probability of an earthquake happening in this area. Now given that the machine tells us today is an earthquake day what is the chance of an actual earthquake happening?
+
+To calculate this one uses {\bf Bayes' Rule} which states this. 
 
 \[P(A|B)=\frac{P(B|A) * P(A)}{P(B)}\]
 
+This reads as: The probability of event A occurring given that we observed event B has occurred is equal to the probability of event B occurring given that event A occurred multiplied by the probability of event A occurring and normalized by the probability of event B occurring.
+
+If event B is not known but is only dependent on event A, the rule can also be written as:
+
+\[P(A|B)=\frac{P(B|A) * P(A)}{P(B|A)*P(A)+P(B|!A)*P(!A)}\]
+
+Using this rule one can construct complicated networks of event that depend on each other thus making probabilities available that were previously unknown or are changed by readings of sensors.
+
 \subsection{Markov Decision Processes}
+
+
+
 \subsection{Natural Language Learning}
 \subsection{Particle Filters}
 \subsection{Heuristics}
