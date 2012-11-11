@@ -35,30 +35,6 @@
 % The first character should be within \initial{}
 \initial{H}\textbf{ere is some sample text to show the initial in the introductory paragraph of this template article. The color and line height of the initial can be modified in the preamble of this document.}
 
-%----------------------------------------------------------------------------------------
-%	ARTICLE CONTENTS
-%----------------------------------------------------------------------------------------
-
-\chapter{Introduction}
-
-
-%------------------------------------------------
-
-\section{Section 1}
-
-
-\begin{itemize}
-  \item First item in a list 
-  \item Second item in a list 
-  \item Third item in a list
-\end{itemize}
-
-
-%------------------------------------------------
-
-\section{Section 2}
-
-
 %------------------------------------------------
 \chapter{Artificial Intelligence}
 \section{What is AI?}
@@ -71,6 +47,11 @@ An AI usually is directed towards one goal. This could mean solving a mathematic
 
 
 \section{History of the Field}
+
+The idea of artificial creatures acting and thinking like humans has been documented as far back as ancient Egypt. But it wasn't until the year 1955 that John McCarthy used the term artificial intelligence and defined it as "the science and engineering of making intelligent machines".
+Only a year later AI research became a scientific field at the campus of Dartmouth College. During the 1960s the Department of Defense was heavily funding AI research and the field was taught around the world.
+For the next decades research continued with big advances in problem solving but few real world applications. In 1997 the field drew a lot of public attention after IBM's chess computer Deep Blue famously defeated the reigning world champion Garry Kasparov.
+In the 21st century AI has found many applications in fields like medical diagnostics, data mining or household appliances like the "Roomba". 
 
 \section{Technological Singularity}
 
@@ -111,13 +92,7 @@ In 2007 the DARPA Urban Challenge has been held requiring the vehicles to finish
 
 Currently Google is developing a driverless car which has already driven 300'000 miles without an accident. The project is led by Sebastian Thrun who also was the head of the Stanford team that won the 2005 DARPA Grand Challenge.
 
-\subsection{Deep Blue}
-
-In 1997 the IBM chess computer Deep Blue famously defeated the world champion Garry Kasparov. 
-
 \subsection{IBM Watson}
-
-\section{Traditional AI vs Neural Networks}
 
 \section{Classification of AI problems}
 
@@ -168,7 +143,15 @@ Using this rule one can construct complicated networks of event that depend on e
 
 \subsection{Markov Decision Processes}
 
+When dealing with stochastic environments one needs to change the approach on planning. While the path of actions to a goal in a fully observable, deterministic environment can be planned in advance and can then be executed without the need to make any adjustments along the way, this is not true for stochastic environments. Because of the random nature of an actions outcome one is forced to reevaluate his priorities. Taking an action that may lead directly to the goal but also holds a small chance of resulting in an undesirable state may suddenly be much less preferable than one that requires additional steps yet holds no risk.
 
+To account for the stochasticity of the actions one computes a value function for states that looks like this.
+
+\[V(s) \leftarrow \left [\begin{matrix} max \\ a \end{matrix} \gamma * \sum_{s'} P(s'|a,s)* V(s')  \right ]+R(s)\]
+
+It reads as follows: The value of state {\bf s} is the maximum over the value of all actions {\bf a} (that can be taken from state {\bf s}). The value of action {\bf a} being defined by the sum over the probability of all possibly resulting states {\bf $s'$} given that one is in state {\bf s} and performs action {\bf a} multiplied by the value of this state {\bf $s'$}. The action value is also multiplied by the discount factor $\gamma$  which is set to a value smaller than one to make action sequences that take less steps than others get higher values. To this one also adds the value R of being in state {\bf s} which may also be negative to represent the cost of getting to that state.
+
+Using this formula the AI can calculate the best sequence of actions from any state at any time. Instead of just calculating a sequence of actions at the beginning the AI recalculates this value if possible after every step taken to maximize the chance of success.
 
 \subsection{Natural Language Learning}
 \subsection{Particle Filters}
