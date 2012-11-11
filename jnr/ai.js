@@ -2,7 +2,8 @@ Nodes = [];
 function createNode(){
   node = {
     distanceFromGoal: API.distanceToGoal(),
-    //  distanceFromNearestBlock: API.nearestBlock().x - API.positionMe().x,
+    xDistanceFromNearestBlock: API.nearestBlock().x - API.positionMe().x,
+    yDistanceFromNearestBlock: API.nearestBlock().y - API.positionMe().y,
     distanceFromNearestGround: API.nearestHole().endX - API.positionMe().x ,
     won: API.win(),
     dead: API.death(),
@@ -52,30 +53,21 @@ function similiarNode(compareTo){
   return tn;
 }
 
-/*function getBestAction(node){*/
-/*//console.dir("Action");*/
-/*ta = null;*/
-/*Object.keys(node.results).forEach(function(a) {*/
-/*successorState = node.results[a];*/
-/*if(( successorState.dead == false &&*/
-/*successorState.distanceFromGoal < node.distanceFromGoal) && */
-/*(ta == null || successorState.distanceFromGoal < node.results[ta].distanceFromGoal)){*/
-/*//console.dir(ta);*/
-/*ta = a;*/
-/*}*/
-/*});*/
-/*//console.dir(ta);*/
-/*return ta;*/
-/*}*/
-
 function getBestAction(node){
-  if(node.distanceFromNearestGround > 0 &&
-     node.distanceFromNearestGround < Params.jumpDistance
-    ){
-    return "jumpRight";
+  console.dir(node.xDistanceFromNearestBlock);
+  console.dir(node.distanceFromNearestGround);
+  if(node.xDistanceFromNearestBlock < node.distanceFromNearestGround){
+    if(node.xDistanceFromNearestBlock < Params.jumpDistance){
+      return ["jumpRight", node.xDistanceFromNearestBlock + node.yDistanceFromNearestBlock + 150];
+    }else{
+      return ["walkRight", 5];
+    }
   }else{
-    console.dir(node.distanceFromNearestGround);
-    return "walkRight";
+    if(node.distanceFromNearestGround < Params.jumpDistance){
+      return ["jumpRight", node.distanceFromNearestGround];
+    }else{
+      return ["walkRight", 5];
+    }
   }
 }
 
@@ -102,10 +94,10 @@ function doPlay(){
     /*act = Params.actions[rand(0,1)];*/
     /*}*/
 
-    API[act](function(){
-      n.results[act] = createNode();
+    API[act[0]](function(){
+      n.results[act[0]] = createNode();
       doPlay();
-    }, 5);
+    }, act[1]);
     /*if(act == 'walkRight' || act == 'walkLeft'){
       console.debug('walk');
       API[act](15, function(){
