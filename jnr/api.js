@@ -23,25 +23,33 @@ API = {
     return this;
   },
 
-  jumpLeft: function(callback) {
-    this.jump('l', callback);
+  jumpLeft: function(callback, distance) {
+    this.jump(callback, 0 - distance);
   },
-  jumpRight: function(callback) {
-    this.jump('r', callback);
+  jumpRight: function(callback, distance) {
+    this.jump(callback, distance);
   },
-  // direction is 'l' or 'r'
-  jump: function(direction, callback) {
+  // distance < 0 => going left, else going right
+  jump: function(callback, distance) {
     var p = EnvironmentTracker.player;
-    
-    var sideKey = {key: Crafty.keys[direction == 'l' ? "LEFT_ARROW" : "RIGHT_ARROW"]};
+
+    var sideKey = {key: Crafty.keys[distance < 0 ? "LEFT_ARROW" : "RIGHT_ARROW"]};
+
+    p.endPosition = p.x + distance;
+    p.endPosCallback = function() {
+      p.trigger('KeyUp', sideKey);
+    }
 
     p.jumpCallback = function() {
-      p.trigger('KeyUp', sideKey);
+      p.trigger('KeyUp', {key: Crafty.keys.LEFT_ARROW});
+      p.trigger('KeyUp', {key: Crafty.keys.RIGHT_ARROW});
+
+      p.endPosition = null;
       callback();
     }
 
-    p.trigger('KeyDown', sideKey);
     p._up = true; 
+    p.trigger('KeyDown', sideKey);
   },
 
   // ***********

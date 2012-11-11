@@ -1,4 +1,4 @@
-What do we need to create a 2 dimensional jump and run game? First of all we need a physics engine to recreate a realistic environment. Then we need a game engine to build our game on. After that we need the game itself and a environment creator to randomly generate the worlds.\bigskip\\
+What do we need to create a 2 dimensional jump and run game? First of all we need a physics engine to recreate a realistic environment. Then we need a game engine to build our game on. After that we need the game itself and an environment creator to randomly generate the worlds.\bigskip\\
 Now we need an AI. But how do we connect the AI with the game? How can the AI controll the player? How can the AI see where the next block is? That's where the Application Programming Interface (API) steps in. With this connection the AI can easily read the environment and move the player. Lastly we ``just'' need the AI algorithms.
 
 \begin{figure}[H]
@@ -38,7 +38,7 @@ There are two main types of physics engines. The high-precision and the real-tim
 \subsection{What do we need?}
 \begin{description}
   \item[collision] We need to be able to check for a collision between the player and a block above the ground.
-  \item[gravity] We need to be able to use gravity to jump and fall down. 
+  \item[gravity] We need to be able to use gravity for the player to jump and fall down. 
   \item[real-time] We are creating a game, so we need in the first place a fast engine.
 \end{description}
 \subsection{Setting Boundaries}
@@ -96,12 +96,12 @@ For it would take too much time to create an own physics and game engine, we dec
   \end{itemize}
 
 \subsection{Basic Composition}
-We used a event-driven development architecture. That means that the engine triggers events and we define what should happen.\bigskip\\
+We used an event-driven development architecture. That means that the engine triggers events and we define what should happen.\bigskip\\
 Here is the main structure of the game in a theoretically programming language:
 \input{codes/game_main_structure}
 
 \subsection{Animation Sprites}
-To bring life to our player we decided to use a sprite. A sprite is basically a collection of images with the same character but in different positions. You just have to decide which of them belong to which movement.\bigskip\\
+To bring life to our player we decided to use a sprite. A sprite is basically a collection of images with the same character but in different positions. You just have to decide which of them belongs to which movement.\bigskip\\
 
 \begin{figure}[H]
   \includegraphics{images/player.png}
@@ -109,12 +109,12 @@ To bring life to our player we decided to use a sprite. A sprite is basically a 
 \end{figure}
 
 \begin{description}
-  \item[standing right] If the player stands and looks to the right the game should use the image from \ul{row 1} and \ul{column 1}
-  \item[standing left] If the player stands and looks to the left the game should use the image from \ul{row 2} and \ul{column 1}
-  \item[jumping right] If the player jumps to the right the game should use the image from \ul{row 1} and \ul{column 3}
-  \item[jumping left] If the player jumps to the left the game should use the image from \ul{row 2} and \ul{column 3}
-  \item[walking right] If the player walks to the right the game should switch through all images from \ul{row 3}
-  \item[walking left] If the player walks to the left the game should switch through all images from \ul{row 4}
+  \item[standing right] If the player stands and looks to the right the game should use the image from \ul{row 1 the first}
+  \item[standing left] If the player stands and looks to the left the game should use the image from \ul{row 2 the first}
+  \item[jumping right] If the player jumps to the right the game should use the image from \ul{row 1 the last}
+  \item[jumping left] If the player jumps to the left the game should use the image from \ul{row 2 the last}
+  \item[walking right] If the player walks to the right the game should switch through all images from \ul{the third row}
+  \item[walking left] If the player walks to the left the game should switch through all images from \ul{the forth row}
 \end{description}
 
 \newpage
