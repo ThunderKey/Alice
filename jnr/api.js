@@ -96,7 +96,8 @@ API = {
   },
 
   _nearestX: function(items, key) {
-    var nearest = {startX: 100000, endX: 100000};
+    var nearest = {};
+    nearest[key] = 10000000;
     var myX = this.positionMe().x;
     for(i in items) {
       var item = items[i];
