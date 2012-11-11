@@ -32,20 +32,27 @@ API = {
   // distance < 0 => going left, else going right
   jump: function(callback, distance) {
     var p = EnvironmentTracker.player;
+    var firstCheck = false;
 
     var sideKey = {key: Crafty.keys[distance < 0 ? "LEFT_ARROW" : "RIGHT_ARROW"]};
 
     p.endPosition = p.x + distance;
     p.endPosCallback = function() {
       p.trigger('KeyUp', sideKey);
+      if(firstCheck) {
+        callback();
+      }
+      firstCheck = true;
     }
 
     p.jumpCallback = function() {
       p.trigger('KeyUp', {key: Crafty.keys.LEFT_ARROW});
       p.trigger('KeyUp', {key: Crafty.keys.RIGHT_ARROW});
 
-      p.endPosition = null;
-      callback();
+      if(firstCheck) {
+        callback();
+      }
+      firstCheck = true;
     }
 
     p._up = true; 
