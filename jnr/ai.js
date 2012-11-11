@@ -13,7 +13,7 @@ function createNode(){
 }
 Running = false;
 Params = {
-  jumpDistance: 132,
+  jumpDistance: 157,
   actions: [
     'jumpRight',
 //  'jumpLeft',
@@ -52,20 +52,31 @@ function similiarNode(compareTo){
   return tn;
 }
 
+/*function getBestAction(node){*/
+/*//console.dir("Action");*/
+/*ta = null;*/
+/*Object.keys(node.results).forEach(function(a) {*/
+/*successorState = node.results[a];*/
+/*if(( successorState.dead == false &&*/
+/*successorState.distanceFromGoal < node.distanceFromGoal) && */
+/*(ta == null || successorState.distanceFromGoal < node.results[ta].distanceFromGoal)){*/
+/*//console.dir(ta);*/
+/*ta = a;*/
+/*}*/
+/*});*/
+/*//console.dir(ta);*/
+/*return ta;*/
+/*}*/
+
 function getBestAction(node){
-  //console.dir("Action");
-  ta = null;
-  Object.keys(node.results).forEach(function(a) {
-    successorState = node.results[a];
-    if(( successorState.dead == false &&
-        successorState.distanceFromGoal < node.distanceFromGoal) && 
-      (ta == null || successorState.distanceFromGoal < node.results[ta].distanceFromGoal)){
-      //console.dir(ta);
-      ta = a;
-    }
-  });
-  //console.dir(ta);
-  return ta;
+  if(node.distanceFromNearestGround > 0 &&
+     node.distanceFromNearestGround < Params.jumpDistance
+    ){
+    return "jumpRight";
+  }else{
+    console.dir(node.distanceFromNearestGround);
+    return "walkRight";
+  }
 }
 
 function stop(won) {
@@ -82,19 +93,19 @@ function doPlay(){
   n = createNode();
   //console.dir(Nodes);
   if(Running){
-    sn = similiarNode(n);
-    act = null
-      if (sn != null){
-        act = getBestAction(sn);
-      }
-    if(act == null){
-      act = Params.actions[rand(0,1)];
-    }
+    /*sn = similiarNode(n);*/
+    /*act = null*/
+    /*if (sn != null){*/
+    act = getBestAction(n);
+    /*}*/
+    /*if(act == null){*/
+    /*act = Params.actions[rand(0,1)];*/
+    /*}*/
 
     API[act](function(){
       n.results[act] = createNode();
       doPlay();
-    }, 15);
+    }, 5);
     /*if(act == 'walkRight' || act == 'walkLeft'){
       console.debug('walk');
       API[act](15, function(){
