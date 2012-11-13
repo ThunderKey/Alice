@@ -1,0 +1,107 @@
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[DIV=calc, paper=a4, fontsize=11pt, twocolumn]{scrartcl}	 % A4 paper and 11pt font size
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[svgnames]{xcolor} % Enabling colors by their 'svgnames'
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{fix-cm}	 % Custom font sizes - used for the initial letter in the document
+\usepackage[utf8x]{inputenc}
+
+\usepackage{sectsty} % Enables custom section titles
+\allsectionsfont{\usefont{OT1}{phv}{b}{n}} % Change the font of all section commands
+
+\usepackage{soul} % for highlighting, underlining etc.
+\usepackage{hyperref} % for hyperlinks
+\usepackage{graphicx} % for graphics
+\usepackage{moreverb} % code snippets
+\usepackage{float}
+
+\usepackage{lettrine} % Package to accentuate the first letter of the text
+\newcommand{\initial}[1]{ % Defines the command and style for the first letter
+  \lettrine[lines=3,lhang=0.3,nindent=0em]{
+    \color{DarkGoldenrod}{
+      \textsf{#1}
+    }
+  }{}
+}
+
+%----------------------------------------------------------------------------------------
+%	LAYOUT SECTION
+%----------------------------------------------------------------------------------------
+
+\usepackage{lastpage} % Used to determine the number of pages in the document (for "Page X of Total")
+\usepackage{fancyhdr} % Needed to define custom headers/footers
+\fancypagestyle{plain}{% Overwriting the plain, so the table of contents will use it too
+  \hypersetup{
+    colorlinks=true
+  }
+
+  % Headers
+  \fancyheadoffset{0.5 cm}
+  \lhead{Timetable}
+  \chead{}
+  \rhead{\today}
+
+  % Footers
+  \fancyfootoffset{0.5 cm}
+  \lfoot{Michael Gerber, Nicolas Ganz}
+  \cfoot{}
+  \rfoot{\footnotesize Page \thepage\ of \pageref{LastPage}} % "Page 1 of 2"
+
+  \setlength{\topmargin}{-30pt}
+  \addtolength{\textheight}{-40pt}
+  \setlength{\columnsep}{1.5cm}
+  \setlength{\columnseprule}{0.4pt}
+
+  \renewcommand{\headrulewidth}{0.4pt} % Thin header rule
+  \renewcommand{\footrulewidth}{0.4pt} % Thin footer rule
+}
+
+\pagestyle{plain}
+
+%----------------------------------------------------------------------------------------
+%	GLOSSARY SECTION
+%----------------------------------------------------------------------------------------
+
+\usepackage[toc]{glossaries} % for the glossary
+\makeglossaries
+
+\newglossaryentry{ai}{
+  name={Artificial Intelligence (AI)},
+  description={is a program that learns and gains experience in doing an activity like a game.}
+}
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\usepackage{titling} % Allows custom title configuration
+
+\newcommand{\HorRule}{\color{DarkGoldenrod} \rule{\linewidth}{1pt}} % Defines the gold horizontal rule around the title
+
+\pretitle{
+  \vspace{-30pt} \begin{flushleft} \HorRule \fontsize{50}{50} \usefont{OT1}{phv}{b}{n} \color{DarkRed} \selectfont
+} % Horizontal rule before the title
+
+
+\posttitle{\par\end{flushleft}\vskip 0.5em} % Whitespace under the title
+
+\preauthor{
+  \begin{flushleft}\large \lineskip 0.5em \usefont{OT1}{phv}{b}{sl} \color{DarkRed}
+} % Author font configuration
+
+\postauthor{
+  \footnotesize \usefont{OT1}{phv}{m}{sl} \color{Black}
+    % Configuration for the institution name
+    BMS Zürich % Your institution
+  \par\end{flushleft}\HorRule
+} % Horizontal rule after the title

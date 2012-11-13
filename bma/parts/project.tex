@@ -178,5 +178,9 @@ The sensors are responsible for the measuring of the environment. We need those 
   \item[all gaps] Where are all gaps?
   \item[finish line] Where is the finish line? To check if the AI is going in to the right direction.
 \end{description}
-
+\subsection{Implementation}
+Those actors and sensors sound all very logical but how could we implement those?\medskip\\
+For the sensors we just have to access the created elements. Of course they need to be well formed and easily accessible. For the nearest gap or block we just have to iterate through all and check which of those the closest one is.\medskip\\
+For the actors it is more complicated. We have to include multiple callbacks and helper variables to ease the access. For example we need a callback that will be triggered when the player lands on the ground or when he have reached the desired distance.
+\newpage
 \section{Our Artificial Intelligence (AI)}
