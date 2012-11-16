@@ -16,6 +16,21 @@
 
 \input{layouts/large_report}
 
+%----------------------------------------------------------------------------------------
+%	GLOSSARY SECTION
+%----------------------------------------------------------------------------------------
+
+\usepackage{glossaries} % for the glossary
+\makeglossaries
+
+\newglossaryentry{asdf}{
+  name={Artificial Intelligence (AI)},
+  description={is a program that learns and gains experience in doing an activity like a game.}
+}
+
+%----------------------------------------------------------------------------------------
+% DOCUMENT
+%----------------------------------------------------------------------------------------
 \begin{document}
 
 \input{parts/commands}
@@ -176,6 +191,7 @@ Using this formula the AI can calculate the best sequence of actions from any st
 
 \chapter{Summary}
 
+\onecolumn
 \chapter{Sources and Glossary}
 
 \section{Sources}
@@ -198,10 +214,14 @@ Using this formula the AI can calculate the best sequence of actions from any st
     \end{itemize}
 \end{description}
 
-\printglossary%[type=main,title={Glossary},toctitle={Glossary}]
+\cleardoublepage
+\phantomsection
 \addcontentsline{toc}{section}{Glossary}
+\printglossary%[type=main,title={Glossary},toctitle={Glossary}]
 
-\section{Image Sources}
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{section}{List of Figures}
 \listoffigures
 
 \end{document}

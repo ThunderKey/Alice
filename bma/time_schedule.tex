@@ -1,0 +1,72 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Large Colored Title Article
+% LaTeX Template
+% Version 1.0 (15/8/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{layouts/small_article}
+
+\begin{document}
+
+\input{parts/commands}
+
+\title{Time Schedule} % Your article title
+\author{Michael Gerber, Nicolas Ganz } % Your name
+\date{\today}
+\maketitle % Print the title
+
+\begin{description}
+  \item[04.08.2012] Idea for the project.
+  \item[04.08 - 10.10.2012] Learning about AI.
+  \item[01.09 - 09.09.2012] First steps in \LaTeX:
+    \begin{itemize}
+      \item Research about \LaTeX
+      \item Trying by creating simple example documents.
+      \item Creating our layouts for the documents. 
+    \end{itemize}
+  \item[09.09 - 10.09.2012] Searching a physics / game engine.
+  \item[11.09 - 02.10.2012] Building a basic game:
+    \begin{itemize}
+      \item Ability to walk.
+      \item Ability to jump.
+      \item Animation of the player.
+      \item A static world with one floor and some blocks.
+    \end{itemize}
+  \item[27.09 - 03.10.2012] Randomizing the world:
+    \begin{itemize}
+      \item Random blocks.
+      \item Random gaps.
+    \end{itemize}
+    \newpage
+  \item[02.10 - 04.10.2012] Creating the API:
+    \begin{itemize}
+      \item Actors:
+        \begin{itemize}
+          \item jump
+          \item walk
+        \end{itemize}
+      \item Sensors:
+        \begin{itemize}
+          \item get all blocks
+          \item get the nearest block
+          \item get all gaps
+          \item get the nearest gap
+          \item get the players position
+          \item get the distance to the finish line
+        \end{itemize}
+    \end{itemize}
+  \item[10.10 - 20.10.2012] Creating a simple AI. We've decided that we firstly just want to create an AI that solves the game without the blocks. Then we should see what it really means to create an AI.
+  \item[20.10 - 15.11.2012] Creating a more complex AI.\\Now it's time to include the blocks.
+  \item[15.11 - 20.11.2012] Finishing the documents.
+\end{description}
+\end{document}
