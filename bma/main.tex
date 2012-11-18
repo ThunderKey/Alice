@@ -17,18 +17,6 @@
 \input{layouts/large_report}
 
 %----------------------------------------------------------------------------------------
-%	GLOSSARY SECTION
-%----------------------------------------------------------------------------------------
-
-\usepackage{glossaries} % for the glossary
-\makeglossaries
-
-\newglossaryentry{asdf}{
-  name={Artificial Intelligence (AI)},
-  description={is a program that learns and gains experience in doing an activity like a game.}
-}
-
-%----------------------------------------------------------------------------------------
 % DOCUMENT
 %----------------------------------------------------------------------------------------
 \begin{document}
@@ -60,7 +48,7 @@
 
 \chapter{Abstract}
 % The first character should be within \initial{}
-\initial{T}\textbf{he creation of smart machines has become more important and more feasible than ever. AIs already influence many aspects of everyday life and are predicted to do much more in the future. In this paper we are looking at the field of artificial intelligence and are giving an example on how one could be implemented to solve problems in the simplified world of a 2D Jump and Run game. The question we are asking is: What methods are there to compose an AI, how do they differ and which suit our problem best?}
+\initial{T}\textbf{he creation of smart machines has become more important and more feasible than ever. AIs already influence many aspects of everyday life and are predicted to do much more in the future. In this paper we are looking at the field of artificial intelligence and are giving an example on how one could be implemented to solve problems in the simplified world of a 2D Jump and Run game. The question we are asking is: What methods are there to compose an AI, how do they differ and which suits our problem best?}
 
 We wrote a simple Jump and Run game and gave it a clean API through which an AI could control it without knowing about the inner workings of the code. We researched AI algorithms, classified the problem given and wrote an AI to play the game.
 
@@ -209,7 +197,7 @@ This project marks a nice starting point for our work with AIs and we both are p
 In respect to the project itself, further work could include making it stochastic by adding random components like moving blocks or making it adversarial by adding limitedly intelligent opponents to it. These changes to the problem would not only require the adding of additional parameters in the existing code but probably a complete rewrite since the change in classification requires a completely different approach to the problem.
 
 \onecolumn
-\chapter{Sources and Glossary}
+\chapter{Sources}
 
 \section{Sources}
 \begin{description}
@@ -236,11 +224,6 @@ In respect to the project itself, further work could include making it stochasti
       \item {Gödel, Escher, Bach: an Eternal Golden Braid - by Douglas Hofstadter }
     \end{itemize}
 \end{description}
-
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{section}{Glossary}
-\printglossary%[type=main,title={Glossary},toctitle={Glossary}]
 
 \cleardoublepage
 \phantomsection
