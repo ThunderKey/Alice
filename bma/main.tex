@@ -60,7 +60,21 @@
 
 \chapter{Abstract}
 % The first character should be within \initial{}
-\initial{H}\textbf{ere is some sample text to show the initial in the introductory paragraph of this template article. The color and line height of the initial can be modified in the preamble of this document.}
+\initial{T}\textbf{he creation of smart machines has become more important and more feasible than ever. AIs already influence many aspects of everyday life and are predicted to do much more in the future. In this paper we are looking at the field of artificial intelligence and are giving an example on how one could be implemented to solve problems in the simplified world of a 2D Jump and Run game. The question we are asking is: What methods are there to compose an AI, how do they differ and which suit our problem best?}
+
+We wrote a simple Jump and Run game and gave it a clean API through which an AI could control it without knowing about the inner workings of the code. We researched AI algorithms, classified the problem given and wrote an AI to play the game.
+
+In conclusion we learned that a fully observable, deterministic, benign and discrete environment like our game is best solved by learning the parameters through trial and error and applying them to a fixed algorithm that deals hierarchically with the steps required to win the game.
+
+\chapter{Introduction}
+
+This paper is about artificial intelligence and it's applications to solve problems in a two dimensional world with simplified laws of physics. We are educating ourselves on the topic of physics engines, game development and artificial intelligence. What we're trying to figure out is how those technologies work and especially how artificial intelligence is able to learn about an environment. The learning part is where the principle topic of change comes in: We want to know how the process of learning works. How does a mind acquiring knowledge and thereby change itself?
+
+We expect there to be a variety of algorithms, knowledge structures and methods of gathering information, each one suitable for different types of problems.
+
+The reason we chose this topic has to do with our job as programmers. Seeing what todays applications are capable of in terms of processing power and data storage one can't help but wonder what would be possible if we made those programs smarter in terms of decision making and understanding patterns. This inevitably leads to the question of how these types of thoughts compare to those of humans. The scientific field that is asking those question is artificial intelligence and we wanted to take this paper as an opportunity to learn more about the fascinating research it performs.
+
+The paper first gives a general overview of what we learned about artificial intelligence and shows some real world applications. Then it gives a detailed description of our project and our research on physics engines.
 
 %------------------------------------------------
 \chapter{Artificial Intelligence}
@@ -82,10 +96,10 @@ In the 21st century AI has found many applications in fields like medical diagno
 
 \section{Technological Singularity}
 
+It is estimated that, about a hundred years from now, artificial intelligence will exceed that of humans. Following this event the machine will continue to build smarter versions of itself, leading to a rapid increase in AIs cognitive abilities. Since no human can predict the events after this point it is seen as the intellectual event horizon.
+
 \newpage
 \section{Real World Applications}
-
-Artificial Intelligence Technology 
 
 \subsection{Amazon Recommendations}
 Everyone knows the ``People who bought X also bought Y''-kind of recommendations online shops provide you with. Sometimes they are spot on and other times they are as far off as they can be. The idea of course is to find patterns in customer interest which can be used to offer people things they are likely to buy thereby increasing profit.
@@ -119,8 +133,7 @@ In 2007 the DARPA Urban Challenge has been held requiring the vehicles to finish
 
 Currently Google is developing a driverless car which has already driven 300'000 miles without an accident. The project is led by Sebastian Thrun who also was the head of the Stanford team that won the 2005 DARPA Grand Challenge.
 
-\subsection{IBM Watson}
-
+\newpage
 \section{Classification of AI problems}
 
 There are four major attributes to an AI problem. Each of them has severe impact on how one approaches to solve that given problem.
@@ -180,17 +193,20 @@ It reads as follows: The value of state {\bf s} is the maximum over the value of
 
 Using this formula the AI can calculate the best sequence of actions from any state at any time. Instead of just calculating a sequence of actions at the beginning the AI recalculates this value if possible after every step taken to maximize the chance of success.
 
-\subsection{Natural Language Learning}
-\subsection{Particle Filters}
-\subsection{Heuristics}
-\subsection{Game Theory}
-
 \chapter{Project}
 \input{parts/project}
 
 %----------------------------------------------------------------------------------------
 
-\chapter{Summary}
+\chapter{Conclusion}
+
+For our project we planned and developed a simple game in HTML5 and JavaScript and learned in the process about physics engines and game development. When we were finished we asked ourselves what an AI would need to know to play the game and swiftly came to the conclusion that it was the same things any human player would need to know. Yet, the AI could not "see" the holes and the blocks in the game so we gave it an interface through which it could ask about their positions. Providing the AI with the interface allowed us to write code that, simply put, looked at the environment we gave it, performed an action and compared the resulting environment with it predecessor. With this method it was able to learn if actions were good or bad and how it could improve its efficiency.
+
+The answer to our question is that yes, there are different classifications of AI problems and that in many ways the playing of a game is one of the easier ones. While problems much more compilcated than ours can be solves through AI technologies they require computational power that is far beyond that of a personal computer and the algorithmic complexity also grows exponentially with the number of factors and uncertainties in those problems. We are very satisfied with the solutions our AI found for the game problem and even more with what we have learned in the process of writing it. We believe to have a much deeper understanding of machine learning and learning in general.
+
+This project marks a nice starting point for our work with AIs and we both are planning to use what we have learned in coming software projects. We are going to further our knowledge in this area because there is still a lot to learn.
+
+In respect to the project itself, further work could include making it stochastic by adding random components like moving blocks or making it adversarial by adding limitedly intelligent opponents to it. These changes to the problem would not only require the adding of additional parameters in the existing code but probably a complete rewrite since the change in classification requires a completely different approach to the problem.
 
 \onecolumn
 \chapter{Sources and Glossary}
@@ -212,6 +228,12 @@ Using this formula the AI can calculate the best sequence of actions from any st
   \item[The Game] \hfill \\
     \begin{itemize}
       \item \printhref{http://craftyjs.com/}{Crafty - Javascript Game Engine}
+    \end{itemize}
+  \item[AI] \hfill \\
+    \begin{itemize}
+      \item \printhref{http://ai-class.org}{AI Class - A Stanford online class on artificial intelligence}
+      \item {Artificial Intelligence: A Modern Approach - by Stuart Russell and Peter Norvig }
+      \item {Gödel, Escher, Bach: an Eternal Golden Braid - by Douglas Hofstadter }
     \end{itemize}
 \end{description}
 
