@@ -18,6 +18,7 @@ Params = {
   actions: [
     'jumpRight',
 //  'jumpLeft',
+    'jumpUp',
   'walkRight'
 //  'walkLeft'
     ]
@@ -54,9 +55,11 @@ function similiarNode(compareTo){
 }
 
 function getBestAction(node){
-  console.dir(node.xDistanceFromNearestBlock);
-  console.dir(node.distanceFromNearestGround);
-  if(node.xDistanceFromNearestBlock < node.distanceFromNearestGround){
+  //console.dir(node.xDistanceFromNearestBlock);
+  //console.dir(node.yDistanceFromNearestBlock);
+  if(node.yDistanceFromNearestBlock < 25 && Math.round(node.xDistanceFromNearestBlock) < 50) {
+    return ["jumpUp", 2];
+  } else if(node.xDistanceFromNearestBlock < node.distanceFromNearestGround){
     if(node.xDistanceFromNearestBlock < Params.jumpDistance){
       return ["jumpRight", node.xDistanceFromNearestBlock + node.yDistanceFromNearestBlock + 150];
     }else{

@@ -28,8 +28,13 @@ function initMovement() {
     _speed: 3,
     _up: false,
     
+    lastPosition: null,
     endPosition: null,
     endPosCallback: null,
+
+    endHeight: null,
+    endHeightCallback: null,
+
     jumpCallback: null,
 
     dead: false,
@@ -104,7 +109,7 @@ function initPlayer() {
       .bind('Moved', function(from) {
         if(!this.isStopped()) {
           // move camera if in range
-          if(this.x >= 150 && this.x <= 2500) {
+          if(this.x >= 150 && this.x <= 2500) ;{
             Crafty.viewport.x = 200 - this.x;
             moveLoggingWindow(this.x - 150);
           }
@@ -124,10 +129,23 @@ function initPlayer() {
             this._up = false;
           }
 
-          if(this.endPosition != null && Math.abs(this.x - this.endPosition) < 5) {
-            var cb = this.endPosCallback;
-            this.endPosition = null;
-            this.endPosCallback = null;
+          if(this.endPosition != null) {
+            var lastPos = this.lastPosition || {x: null, y: null};
+            if(Math.abs(this.x - this.endPosition) < 5
+               || (lastPos.x == this.x && lastPos.y == this.y)) {
+              var cb = this.endPosCallback;
+              this.endPosition = null;
+              this.endPosCallback = null;
+              cb();
+            } else {
+              this.lastPosition = {x: this.x, y: this.y};
+            }
+          }
+
+          if(this.endHeight != null && Math.abs(this.y - this.endHeight) < 5) {
+            var cb = this.endHeightCallback;
+            this.endHeight = null;
+            this.endHeightCallback = null;
             cb();
           }
         }

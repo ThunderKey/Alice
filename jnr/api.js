@@ -29,34 +29,45 @@ API = {
   jumpRight: function(callback, distance) {
     this.jump(callback, distance);
   },
+  jumpUp: function(callback, numberOfBlocks) {
+    this.jump(callback, 50, (numberOfBlocks <= 1 ? 1 : 2) * 50);
+  },
   // distance < 0 => going left, else going right
-  jump: function(callback, distance) {
+  jump: function(callback, distance, height) {
+    var _callback = function() {
+      if(firstTime) {
+        firstTime = false;
+      } else {
+        p.trigger('KeyUp', {key: Crafty.keys.LEFT_ARROW});
+        p.trigger('KeyUp', {key: Crafty.keys.RIGHT_ARROW});
+        p.trigger('KeyUp', {key: Crafty.keys.LEFT_ARROW});
+        p.trigger('KeyUp', {key: Crafty.keys.RIGHT_ARROW});
+        p.trigger('KeyUp', sideKey);
+
+        callback();
+      }
+    }
+
     var p = EnvironmentTracker.player;
-    var firstCheck = false;
+    var firstTime = true;
 
     var sideKey = {key: Crafty.keys[distance < 0 ? "LEFT_ARROW" : "RIGHT_ARROW"]};
 
     p.endPosition = p.x + distance;
-    p.endPosCallback = function() {
-      p.trigger('KeyUp', sideKey);
-      if(firstCheck) {
-        callback();
-      }
-      firstCheck = true;
-    }
+    p.endPosCallback = _callback;
 
-    p.jumpCallback = function() {
-      p.trigger('KeyUp', {key: Crafty.keys.LEFT_ARROW});
-      p.trigger('KeyUp', {key: Crafty.keys.RIGHT_ARROW});
+    p.jumpCallback = _callback;
 
-      if(firstCheck) {
-        callback();
+    if(height != null) {
+      p.endHeight = p.y - height;
+      p.endHeightCallback = function() {
+        p.trigger('KeyDown', sideKey);
       }
-      firstCheck = true;
+    } else {
+      p.trigger('KeyDown', sideKey);
     }
 
     p._up = true; 
-    p.trigger('KeyDown', sideKey);
   },
 
   // ***********
