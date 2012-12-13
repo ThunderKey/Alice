@@ -40,8 +40,6 @@ API = {
       } else {
         p.trigger('KeyUp', {key: Crafty.keys.LEFT_ARROW});
         p.trigger('KeyUp', {key: Crafty.keys.RIGHT_ARROW});
-        p.trigger('KeyUp', {key: Crafty.keys.LEFT_ARROW});
-        p.trigger('KeyUp', {key: Crafty.keys.RIGHT_ARROW});
         p.trigger('KeyUp', sideKey);
 
         callback();
